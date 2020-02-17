@@ -1,13 +1,14 @@
 export class Nurse{
   constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.firstName = firstName.toLowerCase();
+    this.lastName = lastName.toLowerCase();
     this.hireDate = hireDate;
     this.hoursWorked = hoursWorked;
     this.priorDaysOff = priorDaysOff;
     this.role = role;
     this.fte = fte;
     this.vacationRequests = [];
+    this.workRequests = [];
     this.rolePriority = 0;
     this.groupPriority = 0;
   }
@@ -22,6 +23,12 @@ export class Nurse{
     }
   }
 
-  
+  addVacationRequest(vacationRequest){
+    this.vacationRequests.push(vacationRequest);
+  }
+
+  addWorkRequest(workRequest){
+    this.workRequests.push(workRequest);
+  }
 }
 

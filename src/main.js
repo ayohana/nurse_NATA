@@ -7,23 +7,9 @@ import {Nurse} from './nurse';
 import {Unit} from './unit';
 
 $(document).ready(function(){
-
-  $("form#requestForm").submit(function(event){
-    event.preventDefault();
-    let firstName = $("#firstName").val();
-    let lastName = $("#lastName").val();
-    let submissionDate = $("#submissionDate").val();
-    let vacationStartDate = $("#vacationStartDate").val();
-    let workReturnDate = $("#workReturnDate").val();
-    let workDaysRequestedOff = $("#workDaysRequestedOff").val();
-    let vacationHoursAvailable = $("#vacationHoursAvailable").val();
-    let comments = $("#comments").val();
-    let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
-    vacationRequest.checkVacationHoursAvailable();
-    console.log(vacationRequest);
-  });
-
   let unit = new Unit();
+  let workDates = 1;
+
   let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], "NAC", 0.6);
   let nurseB = new Nurse("B", "Class", new Date(2011, 2, 1), 3456, [1/3], "NAC", 0.6);
   let nurseC = new Nurse("C", "Name", new Date(2005, 1, 2), 2345, [1/2], "NAC", 0.9);
@@ -49,9 +35,47 @@ $(document).ready(function(){
   unit.sortByFTE(unit.chargeNurses);
   unit.sortByFTE(unit.registeredNurses);
   unit.sortByFTE(unit.nursingAssistants);
-  // unit.assignGroupPriority(1);
-  // unit.assignGroupPriority(2);
-  // unit.assignGroupPriority(3);
   console.log("sorted",unit.sortedNursingAssistants);
+
+  $("form#vacationForm").submit(function(event){
+    event.preventDefault();
+    let firstName = $("#firstName").val();
+    let lastName = $("#lastName").val();
+    let submissionDate = $("#submissionDate").val();
+    let vacationStartDate = $("#vacationStartDate").val();
+    let workReturnDate = $("#workReturnDate").val();
+    let workDaysRequestedOff = $("#workDaysRequestedOff").val();
+    let vacationHoursAvailable = $("#vacationHoursAvailable").val();
+    let comments = $("#comments").val();
+    let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
+    vacationRequest.checkVacationHoursAvailable();
+    console.log(vacationRequest);
+    let currentNurse = unit.searchNurse(firstName, lastName);
+    currentNurse.addVacationRequest(vacationRequest);
+  });
+
+  $("#moreDates").click(function(event){
+    event.preventDefault();
+    let dateField = document.createElement('input');
+    dateField.type = "date";
+    dateField.className = "workDates";
+    dateField.id = "workDate" + workDates++;
+    $("#multipleDates").append(dateField);
+  });
+
+  $("#workSubmit").click(function(event){
+    event.preventDefault();
+    let firstNameWork = $("#firstNameWork").val();
+    let lastNameWork = $("#lastNameWork").val();
+    let currentNurse = unit.searchNurse(firstNameWork, lastNameWork);
+    let dates = document.getElementsByClassName("workDates");
+    console.log("dates?", dates);
+    for (let i=0; i<dates.length; i++){
+      if(dates[i].valueAsDate != null){
+        currentNurse.addWorkRequest(dates[i].valueAsDate);
+      }
+    }
+  });
+
 
 });

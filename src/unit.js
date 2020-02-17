@@ -23,6 +23,18 @@ export class Unit{
     }
   }
 
+  searchNurse(firstName, lastName){
+    for(let i=0; i< this.nurses.length; i++){
+      if (lastName.toLowerCase() === this.nurses[i].lastName){
+        if(firstName.toLowerCase() === this.nurses[i].firstName || firstName == ""){
+          return this.nurses[i];
+        }
+        
+      } 
+    }
+    alert("No nurse found by this name");
+  }
+
   sortByFTE(array){
     let fullTime = [];
     let partTime = [];
@@ -72,16 +84,6 @@ export class Unit{
     }
     return mergedArray;
   }
-
-  // assignGroupPriority(roleNumber){
-  //   if (roleNumber === 1){
-  //     this.sortByHours(this.chargeNurses);
-  //   } else if (roleNumber === 2){
-  //     this.sortByHours(this.registeredNurses);
-  //   } else{
-  //     this.sortByHireDate(this.nursingAssistants);
-  //   }
-  // }
 
   sortByHours(roleArray){
     roleArray.sort((a,b) => parseFloat(a.hoursWorked) - parseFloat(b.hoursWorked));
