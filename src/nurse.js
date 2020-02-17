@@ -1,10 +1,12 @@
 export class Nurse{
-  constructor(name, hireDate, hoursWorked, priorDaysOff, role){
-    this.name = name;
+  constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.hireDate = hireDate;
     this.hoursWorked = hoursWorked;
     this.priorDaysOff = priorDaysOff;
     this.role = role;
+    this.fte = fte;
     this.vacationRequests = [];
     this.rolePriority = 0;
     this.groupPriority = 0;

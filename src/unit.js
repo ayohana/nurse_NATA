@@ -11,6 +11,7 @@ export class Unit{
 
   addNurse(nurse){
     this.nurses.push(nurse);
+    this.sortByLastName(this.nurses);
     if (nurse.rolePriority === 1){
       this.chargeNurses.push(nurse);
     } else if (nurse.rolePriority === 2){
@@ -42,5 +43,19 @@ export class Unit{
     for (let i=0; i<roleArray.length; i++){
       roleArray[i].groupPriority = i;
     }
+  }
+
+  sortByLastName(nurseArray){
+    nurseArray.sort(function(a,b){
+      let c = a.lastName.toLowerCase();
+      let d = b.lastName.toLowerCase();
+      if (c < d){
+        return -1;
+      }
+      if (c > d){
+        return 1;
+      }
+      return 0;
+    }); 
   }
 }
