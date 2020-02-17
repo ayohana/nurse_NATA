@@ -16,6 +16,7 @@ $(document).ready(function(){
     let vacationHoursAvailable = $("#vacationHoursAvailable").val();
     let comments = $("#comments").val();
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
+    vacationRequest.checkVacationHoursAvailable();
     console.log(vacationRequest);
   });
 
