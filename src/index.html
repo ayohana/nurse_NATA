@@ -13,9 +13,13 @@
     <div class="container">
       <form id="requestForm">
         <div class="form-group">
-          <label for="name">Enter staff's name:</label>
-          <input type="text" id="name" placeholder="Nurse A">
+          <label for="firstName">Enter staff's first name:</label>
+          <input type="text" id="firstName" placeholder="first name">
         </div>
+        <div class="form-group">
+            <label for="lastName">Enter staff's last name:</label>
+            <input type="text" id="lastName" placeholder="last name" required>
+          </div>
         <div class="form-group">
           <label for="submissionDate">Enter date of form submission:</label>
           <input type="date" id="submissionDate">
@@ -29,21 +33,17 @@
             <input type="date" id="workReturnDate">
         </div>
         <div class="form-group">
-            <label for="workDaysRequestedOff">Enter total number of days requested day off:</label>
+            <label for="workDaysRequestedOff">Enter total number of days requested  off:</label>
             <input type="text" id="workDaysRequestedOff">
         </div>
         <div class="form-group">
-            <label for="vacationHoursAvaliable">Enter anticipated vacation hours avaliable:</label>
-            <input type="text" id="vacationHoursAvaliable">
+            <label for="vacationHoursAvailable">Enter anticipated vacation hours available:</label>
+            <input type="text" id="vacationHoursAvailable">
         </div>
         <div class="form-group">
             <label for="comments">Enter additional comments:</label>
             <input type="text" id="comments">
         </div>
-
-
-
-
         <button class="btn btn-primary">Submit</button>
       </form>
     </div>
