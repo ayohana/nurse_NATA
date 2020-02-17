@@ -7,10 +7,10 @@ import {Unit} from './unit';
 
 $(document).ready(function(){
   let unit = new Unit();
-  let nurseA = new Nurse("A", new Date(2000, 1, 2), 1234, [2/3, 4/5], "CN");
-  let nurseB = new Nurse("B", new Date(2011, 2, 1), 3456, [1/3], "NAC");
-  let nurseC = new Nurse("C", new Date(2005, 1, 2), 2345, [1/2], "NAC");
-  let nurseD = new Nurse("D", new Date(2008, 3, 4), 543, [], "NAC")
+  let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], "CN", 0.9);
+  let nurseB = new Nurse("B", "Class", new Date(2011, 2, 1), 3456, [1/3], "NAC", 0.6);
+  let nurseC = new Nurse("C", "Name", new Date(2005, 1, 2), 2345, [1/2], "NAC", 0.9);
+  let nurseD = new Nurse("D", "Rank", new Date(2008, 3, 4), 543, [], "NAC", 0.3)
   
   nurseA.assignRolePriority();
   nurseB.assignRolePriority();
