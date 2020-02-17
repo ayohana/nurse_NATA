@@ -1,36 +1,30 @@
-# _Nurse NATA_
+# [NursSync](https://github.com/ayohana/nurse_NATA.git/)
 
-#### _Brief desc of Project, 02.17.2020_
-<!-- ##### _Version 1.1 Updated 01.11.2020_ -->
+#### Team Week Javascript Project for Epicodus, 02.17.2020
 
-#### By _**Adela Darmansyah, Tiffany Siu, Andriy Veremeyeyev, Neha Doodi**_
+#### By _**Adela Darmansyah, Tiffany Siu, Andriy Veremyeyev, Neha Doodi**_
 
 ## Description
 
-_README under construction_
-<!-- _Detailed desc w/ purpose/usage, what does, motivation to create, why exists, other info for users/developers to have_ -->
+**This is a web application to help a nurse scheduler organize nurses' vacation requests during Summer Prime Time at 3 Olympic, General Surgical Unit, Swedish Medical Center, Issaquah, WA.** A nurse scheduler can submit staff vacation requests and the application will return a priority list for all the requests. The priority list is determined by:
+
+* Holiday work reqeusts
+* Seniority level
+* Previous year vacation dates
+* FTE level
 
 ## Setup/Installation Requirements
+
+* Clone this [repository](https://github.com/ayohana/nurse_NATA.git/)
+* Open the command line and navigate into the repository.
+  * Use the command `npm install` to install all necessary plugins.
+  * Use the command `npm run start` to start the web application.
 
 ### Requirements to Run
 * _Web Browser_
 * _Webpack_
 * _Node.js_
 * _NPM_
-
-### Instructions
-
-<!-- *This page may be viewed by:*
-
-1. Download and install Node.js from the [official website](https://nodejs.org/en/download/)
-2. Clone the [repository](https://github.com/TSiu88/beep-boop.git) from my [GitHub page](https://github.com/TSiu88)
-3. Use a command line/Bash to move to the project directory with `cd project-directory`
-4. Run `npm install` to get all dependencies. 
-5. Run `npm run start` to start up the program -->
-
-<!-- _This page may be viewed by cloning the [repository](https://github.com/TSiu88/beep-boop.git) from my [GitHub page](https://github.com/TSiu88) and opening the **index.html** file in any web browser._ -->
-
-<!-- _Other things need to run like servers, databases, code, how to install and use program_ -->
 
 ## Other Technologies Used
 
@@ -46,6 +40,12 @@ _README under construction_
 
 ## Notable Features
 <!-- _features that make project stand out_ -->
+
+## User Stories
+
+* As a scheduler, I want to be able to organize nurses vacation schedules without much paperwork so that I can be more efficient.
+* As a scheduler, I want to be able to look up a nurse's vacation requests and her previous vacation so that I can review them.
+* As a scheduler, I want to see the list of reasons why the application prioritizes a nurses vacation request so that I know why the nurse can have the request approved.
 
 ## Specifications
 
@@ -87,14 +87,21 @@ _Some example tests:_
 
 ## Known Bugs
 
-_There are currently no known bugs in this program_
+There are currently no known bugs in this program.
 
 ## Support and contact details
 
-_If there are any question or concerns please contact me at my [email](mailto:tsiu88@gmail.com). Thank you._
+If there are any question or concerns please contact us at our emails:
+
+* [Adela Darmansyah](mailto:adela.yohana@gmail.com)
+* [Tiffany Siu](mailto:tsiu88@gmail.com)
+* [Neha Doodi](mailto:nehadoodipoonia@gmail.com)
+* [Andriy Veremyeyev](mailto:belyybrat@gmail.com)
+
+Thank you.
 
 ### License
 
 *This software is licensed under the MIT license*
 
-Copyright (c) 2020 **_Adela Darmansyah, Tiffany Siu, Andriy Veremeyeyev, Neha Doodi_**
+Copyright (c) 2020 **_Adela Darmansyah, Tiffany Siu, Andriy Veremyeyev, Neha Doodi_**
