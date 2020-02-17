@@ -1,9 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>NursSync</title>
   </head>
   <body>
-    
+    <div class="jumbotron">
+      <h1>NursSync</h1>
+      <hr>
+      <p>Submit a vacation request below!</p>
+    </div>
+
+    <div class="container">
+      <form id="requestForm">
+        <div class="form-group">
+          <label for="name">Enter staff's name:</label>
+          <input type="text" id="name" placeholder="Nurse A">
+        </div>
+        <div class="form-group">
+          <label for="submissionDate">Enter date of form submission:</label>
+          <input type="date" id="submissionDate">
+        </div>
+        <div class="form-group">
+          <label for="vacationStartDate">Enter vacation start date:</label>
+          <input type="date" id="vacationStartDate">
+        </div>
+        <div class="form-group">
+            <label for="workReturnDate">Enter return to work date:</label>
+            <input type="date" id="workReturnDate">
+        </div>
+        <div class="form-group">
+            <label for="workDaysRequestedOff">Enter total number of days requested day off:</label>
+            <input type="date" id="workDaysRequestedOff">
+        </div>
+        <div class="form-group">
+            <label for="vacationHoursAvaliable">Enter anticipated vacation hours avaliable:</label>
+            <input type="date" id="vacationHoursAvaliable">
+        </div>
+        <div class="form-group">
+            <label for="comments">Enter additional comments:</label>
+            <input type="date" id="comments">
+        </div>
+
+
+
+
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
   </body>
 </html>
