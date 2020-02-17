@@ -1,4 +1,4 @@
-import {Nurse} from `./nurse`;
+//import {Nurse} from './nurse';
 
 export class Unit{
   constructor(){
@@ -9,21 +9,38 @@ export class Unit{
 
   }
 
-  addNurse(name){
-    this.nurses.push(name);
-    if (roleNumber === 1){
-      this.chargeNurses.push(name);
-    } else if (roleNumber === 2){
-      this.registeredNurses.push(name);
+  addNurse(nurse){
+    this.nurses.push(nurse);
+    if (nurse.rolePriority === 1){
+      this.chargeNurses.push(nurse);
+    } else if (nurse.rolePriority === 2){
+      this.registeredNurses.push(nurse);
     } else{
-      this.nursingAssistants.push(name);
+      this.nursingAssistants.push(nurse);
     }
   }
 
   assignGroupPriority(roleNumber){
     if (roleNumber === 1){
-      this.chargeNurses.sort((a,b) => parseFloat(a.hoursWorked) - parseFloat(b.hoursWorked));
+      this.sortByHours(this.chargeNurses);
+    } else if (roleNumber === 2){
+      this.sortByHours(this.registeredNurses);
+    } else{
+      this.sortByHireDate(this.nursingAssistants);
     }
-    //Add for other roles
+  }
+
+  sortByHours(roleArray){
+    roleArray.sort((a,b) => parseFloat(a.hoursWorked) - parseFloat(b.hoursWorked));
+    for (let i=0; i<roleArray.length; i++){
+      roleArray[i].groupPriority = i;
+    }
+  }
+
+  sortByHireDate(roleArray){
+    roleArray.sort((a,b) => a.hireDate - b.hireDate);
+    for (let i=0; i<roleArray.length; i++){
+      roleArray[i].groupPriority = i;
+    }
   }
 }
