@@ -84,6 +84,10 @@ function addWorkRequestOutput(nurseArray){
 $(document).ready(function(){
   let unit = new Unit();
   unit.requestDueDate = new Date(2020, 1, 17);
+  unit.holidays2018 = [new Date(2020, 6, 4), new Date(2020, 8, 3)];
+  unit.holidays2019 = [new Date(2020, 6, 4), new Date(2020, 8, 2)];
+  unit.holidays2020 = [new Date(2020, 6, 4), new Date(2020, 8, 7)];
+
   let workDates = 1;
 
   let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], [], "NAC", 0.6);
@@ -92,6 +96,7 @@ $(document).ready(function(){
   let nurseD = new Nurse("D", "Rank", new Date(2008, 3, 4), 543, [], "NAC", 0.3);
   let nurseE = new Nurse("E", "EEEE", new Date(2018, 1, 4), 5432, [], "NAC", 0.9);
   let nurseF = new Nurse("F", "FFFF", new Date(2002, 5, 4), 1543, [], "NAC", 0.9);
+
 
   addNurseToUnit(nurseA, unit);
   addNurseToUnit(nurseB, unit);
@@ -115,9 +120,9 @@ $(document).ready(function(){
   nurseB.pastSchedule2019.savePriorVacationDates([new Date(2019, 6, 2), new Date(2019, 6, 3), new Date(2019, 6, 4), new Date(2019, 6, 5), new Date(2019, 6, 6)]);
   nurseC.pastSchedule2019.savePriorVacationDates([]);
   
-  nurseA.addVacationRequest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
-  nurseB.addVacationRequest("B", "Class", new Date(2020, 1, 17), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
-  nurseC.addVacationRequest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+  nurseA.addVacationRequestTest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+  nurseB.addVacationRequestTest("B", "Class", new Date(2020, 1, 17), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
+  nurseC.addVacationRequestTest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
 
   console.log(unit);
   console.log(nurseA);
