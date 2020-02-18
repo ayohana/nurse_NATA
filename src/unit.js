@@ -9,6 +9,7 @@ export class Unit{
     this.sortedChargeNurses = [];
     this.sortedRegisteredNurses = [];
     this.sortedNursingAssistants = [];
+    this.requestDueDate; 
   }
 
   addNurse(nurse){
@@ -55,9 +56,6 @@ export class Unit{
         perDiem.push(array[i]);
       }
     }
-    console.log("full time", fullTime);
-    console.log("part time", partTime);
-    console.log("per diem", perDiem);
     if (roleNumber ===1 || roleNumber === 2){
       this.sortByHours(fullTime);
       this.sortByHours(partTime);
