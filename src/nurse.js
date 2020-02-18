@@ -1,4 +1,5 @@
 import { PastSchedule } from "./past-schedule";
+import { VacationRequest } from "./vacation-request";
 
 export class Nurse{
   constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
@@ -27,7 +28,8 @@ export class Nurse{
     }
   }
 
-  addVacationRequest(vacationRequest){
+  addVacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
+    let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
     this.vacationRequests.push(vacationRequest);
   }
 
@@ -35,16 +37,34 @@ export class Nurse{
     this.workRequests.push(workRequest);
   }
 
-  analyzeVacationRequest(){
-  // 1 Work requests for this year
 
-  // 2 
+  // (Separate function?) Schedule holiday for CN first, RN second, NAC third
 
-  // 3
+  // Analyze work request:
+    // 1 If work request is submitted after the deadline, do not analyze the request
+    // 2 Plug in work request to calendar so that other nurses who requested off can get a chance to have those dates off
 
-  // 4
 
-  // 5 
-  }
+
+  // Analyze vacation request:
+ 
+  // 1 Analyze 2 years past schedule to see their vacation dates
+
+  // analyzeVacationRequest(){
+
+    //   for (i=0; i<this.vacationRequests.length; i++){
+  //     if ( this.pastSchedule2019.priorVacationDates ) 
+  //     this.pastSchedule2018.priorVacationDates
+  //   }
+
+  // 2 Analyze 2 years past schedule to see their past holidays worked (same priority with #2)
+
+  // 3 Comparing nurse A and nurse B vacation requests
+  //if they have same request dates then do #2 and #3
+  //else look into their seniority (FTE, hours worked, etc)
+
+  // Returns approval/rejection with the dates
+
+  
 }
 

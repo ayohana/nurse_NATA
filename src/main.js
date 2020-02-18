@@ -62,6 +62,7 @@ function addVactionOutput(nurseArray){
 
 $(document).ready(function(){
   let unit = new Unit();
+  unit.requestDueDate = new Date(2020, 1, 17);
   let workDates = 1;
 
   let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], [], "NAC", 0.6);
@@ -71,11 +72,6 @@ $(document).ready(function(){
   let nurseE = new Nurse("E", "EEEE", new Date(2018, 1, 4), 5432, [], "NAC", 0.9);
   let nurseF = new Nurse("F", "FFFF", new Date(2002, 5, 4), 1543, [], "NAC", 0.9);
 
-  nurseA.pastSchedule2019.savePastSchedule([new Date(2019, 9, 5), new Date(2019, 5, 4), new Date(2019, 1, 4), new Date(2019, 3, 4)]);
-  
-  console.log(nurseA.pastSchedule2019.daysWorked);
-  console.log(nurseA.pastSchedule2019);
-  
   addNurseToUnit(nurseA, unit);
   addNurseToUnit(nurseB, unit);
   addNurseToUnit(nurseC, unit);
@@ -83,17 +79,29 @@ $(document).ready(function(){
   addNurseToUnit(nurseE, unit);
   addNurseToUnit(nurseF, unit);
 
-  console.log("all nurses", unit.nurses);
-  console.log("unit", unit);
-  console.log("unsorted", unit.nursingAssistants);
   unit.sortByFTE(unit.chargeNurses);
   unit.sortByFTE(unit.registeredNurses);
   unit.sortByFTE(unit.nursingAssistants);
-  console.log("sorted",unit.sortedNursingAssistants);
 
   addToPriorityOutput(unit.sortedChargeNurses, "CNpriority");
   addToPriorityOutput(unit.sortedRegisteredNurses, "RNpriority");
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
+
+  nurseA.pastSchedule2019.savePastSchedule([new Date(2019, 6, 1), new Date(2019, 6, 2), new Date(2019, 6, 4)]);
+  nurseB.pastSchedule2019.savePastSchedule([]);
+  nurseC.pastSchedule2019.savePastSchedule([new Date(2019, 6, 3), new Date(2019, 6, 4), new Date(2019, 6, 5)]);
+  nurseA.pastSchedule2019.savePriorVacationDates([]);
+  nurseB.pastSchedule2019.savePriorVacationDates([new Date(2019, 6, 2), new Date(2019, 6, 3), new Date(2019, 6, 4), new Date(2019, 6, 5), new Date(2019, 6, 6)]);
+  nurseC.pastSchedule2019.savePriorVacationDates([]);
+  
+  nurseA.addVacationRequest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+  nurseB.addVacationRequest("B", "Class", new Date(2020, 1, 17), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
+  nurseC.addVacationRequest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+
+  console.log(unit);
+  console.log(nurseA);
+  console.log(nurseB);
+  console.log(nurseC);
 
   $("form#vacationForm").submit(function(event){
     event.preventDefault();
@@ -107,7 +115,6 @@ $(document).ready(function(){
     let comments = $("#comments").val();
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
     vacationRequest.checkVacationHoursAvailable();
-    console.log(vacationRequest);
     let currentNurse = unit.searchNurse(firstName, lastName);
     currentNurse.addVacationRequest(vacationRequest);
     $("#vacationOutput").empty();
@@ -129,7 +136,6 @@ $(document).ready(function(){
     let lastNameWork = $("#lastNameWork").val();
     let currentNurse = unit.searchNurse(firstNameWork, lastNameWork);
     let dates = document.getElementsByClassName("workDates");
-    console.log("dates?", dates);
     for (let i=0; i<dates.length; i++){
       if(dates[i].valueAsDate != null){
         currentNurse.addWorkRequest(dates[i].valueAsDate);
