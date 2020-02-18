@@ -82,9 +82,12 @@ function addWorkRequestOutput(nurseArray){
   }
 }
 
+
+
 $(document).ready(function(){
   let unit = new Unit();
-  unit.requestDueDate = new Date(2020, 1, 17); // Request Due Date: 1/17/20
+  unit.requestDueDate = new Date(); // Request Due Date: Current Date
+  $("#dueDate").attr('value', unit.requestDueDate.toISOString().substr(0,10));
   let workDates = 1;
 
   let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], [], "NAC", 0.6);
@@ -125,9 +128,11 @@ $(document).ready(function(){
   console.log(nurseB);
   console.log(nurseC);
 
-  console.log(nurseA.checkVacationRequest(unit.requestDueDate));
-  console.log(nurseB.checkVacationRequest(unit.requestDueDate));
-  console.log(nurseC.checkVacationRequest(unit.requestDueDate));
+  $("#dueDateButton").click(function(event){
+    event.preventDefault();
+    unit.requestDueDate = $("#dueDate").val();
+    $("#dateChanged").text("Date Changed to " + unit.requestDueDate);
+  });
 
   $("form#vacationForm").submit(function(event){
     event.preventDefault();
@@ -139,12 +144,20 @@ $(document).ready(function(){
     let workDaysRequestedOff = $("#workDaysRequestedOff").val();
     let vacationHoursAvailable = $("#vacationHoursAvailable").val();
     let comments = $("#comments").val();
+
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
+
     vacationRequest.checkVacationHoursAvailable();
     let currentNurse = unit.searchNurse(firstName, lastName);
-    currentNurse.addVacationRequest(vacationRequest);
-    $("#vacationOutput").empty();
-    addVactionOutput(unit.nurses);
+    if (vacationRequest.checkVacationRequest(unit.requestDueDate)){
+      currentNurse.addVacationRequest(vacationRequest);
+      $("#vacationOutput").empty();
+      addVactionOutput(unit.nurses);
+      $("#vacationMessage").text("Vacation request succesfully submitted!");
+    } else {
+      $("#vacationMessage").text(`Vacation request is past the submission due date: ${unit.requestDueDate.toDateString()}. Please manually check if requested dates are still available.`);
+    }
+    
   });
 
   $("#moreDates").click(function(event){

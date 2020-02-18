@@ -48,13 +48,7 @@ export class Nurse{
     // 1 If vacation request is submitted after the deadline, do not analyze the request. Scheduler checks manually
     // 2 Plug in work request to calendar so that other nurses who requested off can get a chance to have those dates off
 
-  checkVacationRequest(requestDueDate){
-    if (this.vacationRequests[this.vacationRequests.length-1].submissionDate > requestDueDate) {
-      return `Vacation request is past the submission due date: ${requestDueDate.toDateString()}. Please manually check if requested dates are still available.`;
-    } else {
-      return `Vacation request succesfully submitted!`;
-    }
-  }
+  
 
   checkWorkRequest(requestDueDate){
     if (this.workRequests[this.workRequests.length-1].submissionDate > requestDueDate) {

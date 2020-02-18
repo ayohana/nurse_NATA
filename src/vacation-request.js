@@ -24,4 +24,14 @@ export class VacationRequest {
     }
   }
 
+  checkVacationRequest(requestDueDate){
+    // console.log("vacation date",this.submissionDate);
+    // console.log("due date", requestDueDate);
+    if (this.submissionDate > requestDueDate.toISOString().substr(0,10)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 }

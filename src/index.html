@@ -9,6 +9,13 @@
     </div>
 
     <div class="container">
+      <div id="dueDateSection">
+        <label for="dueDate">Request Due Date: </label>
+        <input type="date" name="requestDueDate" id="dueDate">
+        <button id="dueDateButton">Change Due Date</button>
+        <p><span id="dateChanged"></span></p>
+        <hr>
+      </div>
       <div id="vacationRequest">
         <h2>Vacation Request</h2>
         <form id="vacationForm">
@@ -45,6 +52,7 @@
             <input type="text" id="comments">
           </div>
           <button id="vacationSubmit" class="btn btn-primary">Submit</button>
+          <p><span id="vacationMessage"></span></p>
         </form>
       </div> <!--End of Vacation Request-->
 
