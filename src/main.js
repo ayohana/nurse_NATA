@@ -6,6 +6,33 @@ import { VacationRequest } from '../src/vacation-request';
 import {Nurse} from './nurse';
 import {Unit} from './unit';
 
+function addNurseToUnit(nurse, unit){
+  nurse.assignRolePriority();
+  unit.addNurse(nurse);
+}
+
+function getFullName(array, position){
+  return array[position].firstName.toUpperCase() + " " + array[position].lastName.toUpperCase();
+}
+
+function addToPriorityOutput(nurseArray, outputLocation){
+  if(nurseArray.length === 0){
+    $(eval(`"#${outputLocation}"`)).append("No nurses found.");
+  } else {
+    for (let i=0; i< nurseArray.length; i++){
+      let output = [];
+      output.push(getFullName(nurseArray, i));
+      output.push("Hire Date: " + nurseArray[i].hireDate.toDateString());
+      output.push("Hours Worked: " + nurseArray[i].hoursWorked);
+      output.push("FTE: " + nurseArray[i].fte);
+      let listItem = document.createElement('li');
+      listItem.innerHTML = output.toString();
+      $(eval(`"#${outputLocation}"`)).append(listItem);
+    }
+  }
+  
+}
+
 $(document).ready(function(){
   let unit = new Unit();
   let workDates = 1;
@@ -17,18 +44,13 @@ $(document).ready(function(){
   let nurseE = new Nurse("E", "EEEE", new Date(2018, 1, 4), 5432, [], "NAC", 0.9);
   let nurseF = new Nurse("F", "FFFF", new Date(2002, 5, 4), 1543, [], "NAC", 0.9);
   
-  nurseA.assignRolePriority();
-  nurseB.assignRolePriority();
-  nurseC.assignRolePriority();
-  nurseD.assignRolePriority();
-  nurseE.assignRolePriority();
-  nurseF.assignRolePriority();
-  unit.addNurse(nurseA);
-  unit.addNurse(nurseB);
-  unit.addNurse(nurseC);
-  unit.addNurse(nurseD);
-  unit.addNurse(nurseE);
-  unit.addNurse(nurseF);
+  addNurseToUnit(nurseA, unit);
+  addNurseToUnit(nurseB, unit);
+  addNurseToUnit(nurseC, unit);
+  addNurseToUnit(nurseD, unit);
+  addNurseToUnit(nurseE, unit);
+  addNurseToUnit(nurseF, unit);
+
   console.log("all nurses", unit.nurses);
   console.log("unit", unit);
   console.log("unsorted", unit.nursingAssistants);
@@ -36,6 +58,10 @@ $(document).ready(function(){
   unit.sortByFTE(unit.registeredNurses);
   unit.sortByFTE(unit.nursingAssistants);
   console.log("sorted",unit.sortedNursingAssistants);
+
+  addToPriorityOutput(unit.sortedChargeNurses, "CNpriority");
+  addToPriorityOutput(unit.sortedRegisteredNurses, "RNpriority");
+  addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
   $("form#vacationForm").submit(function(event){
     event.preventDefault();
