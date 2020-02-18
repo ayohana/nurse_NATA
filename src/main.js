@@ -83,7 +83,7 @@ function addWorkRequestOutput(nurseArray){
 
 $(document).ready(function(){
   let unit = new Unit();
-  unit.requestDueDate = new Date(2020, 1, 17); // Request Due Date: 1/17/20
+  unit.requestDueDate = new Date(2020, 1, 17); // Request Due Date: 2/17/20
   let workDates = 1;
 
   let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], [], "NAC", 0.6);
@@ -92,6 +92,7 @@ $(document).ready(function(){
   let nurseD = new Nurse("D", "Rank", new Date(2008, 3, 4), 543, [], "NAC", 0.3);
   let nurseE = new Nurse("E", "EEEE", new Date(2018, 1, 4), 5432, [], "NAC", 0.9);
   let nurseF = new Nurse("F", "FFFF", new Date(2002, 5, 4), 1543, [], "NAC", 0.9);
+
 
   addNurseToUnit(nurseA, unit);
   addNurseToUnit(nurseB, unit);

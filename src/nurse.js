@@ -73,17 +73,47 @@ export class Nurse{
 
 
   // Analyze vacation request:
+
+  analyzeVacationRequest(groupOfNurses){
+    this.compareWithPriorVacations();
+    this.compareWithPastHolidaysWorked();
+    this.compareWithOtherVacationRequests(groupOfNurses);
+  }
  
   // 1 Analyze 2 years past schedule to see their vacation dates
 
-  // analyzeVacationRequest(){
+  compareWithPriorVacations(){
 
-    //   for (i=0; i<this.vacationRequests.length; i++){
-  //     if ( this.pastSchedule2019.priorVacationDates ) 
-  //     this.pastSchedule2018.priorVacationDates
-  //   }
+    let vacations2020 = this.vacationRequests;
+    let vacations2019 = this.pastSchedule2019.priorVacationDates;
+    let vacations2018 = this.pastSchedule2018.priorVacationDates;
+
+    for (let i=0; i < vacations2020.length; i++){
+      if (vacations2019.includes(vacations2020[i]) || vacations2018.includes(vacations2020[i]) ){
+        return console.log(`Vacations dates overlaped with ${vacations2020[i]}`);
+      }
+    }
+  }
+
 
   // 2 Analyze 2 years past schedule to see their past holidays worked (same priority with #2)
+
+  compareWithPastHolidaysWorked(){
+    let vacations2020 = this.vacationRequests;
+    let holidays2020 = this.holidays2020;
+    let workdays2019 = this.pastSchedule2019.daysWorked;
+    let workdays2018 = this.pastSchedule2018.daysWorked;
+
+    for (let i=0; i < vacations2020.length; i++){
+      if (holidays2020.includes(vacations2020[i]) ){
+        if (workdays2019.includes(vacations2020[i]) || workdays2018.includes(vacations2020[i]) ){
+          continue;
+        }
+      } else {
+        return console.log(`You didn't work this holiday ${vacations2020[i]} `);
+      }
+    }
+  }
 
   // 3 Comparing nurse A and nurse B vacation requests
   //if they have same request dates then do #2 and #3
@@ -91,6 +121,17 @@ export class Nurse{
 
   // Returns approval/rejection with the dates
 
+  compareWithOtherVacationRequests(groupOfNurses){
+    let vacations2020 = this.vacationRequests;
+    for (let i=0; i < vacations2020.length; i++){
+      for (let j=0; j < groupOfNurses.length; j++) {
+        let otherRequest = groupOfNurses[j].vacationRequests;
+        if (otherRequest.includes(vacations2020[i]) ){
+          return console.log(`Your day ${vacations2020[i]} overlapped with other person request`);
+        }
+      }
+    }
+  }
   
 }
 
