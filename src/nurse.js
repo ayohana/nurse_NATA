@@ -34,5 +34,17 @@ export class Nurse{
   addWorkRequest(workRequest){
     this.workRequests.push(workRequest);
   }
+
+  analyzeVacationRequest(){
+  // 1 Work requests for this year
+
+  // 2 
+
+  // 3
+
+  // 4
+
+  // 5 
+  }
 }
 

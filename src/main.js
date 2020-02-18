@@ -46,6 +46,7 @@ $(document).ready(function(){
   let nurseF = new Nurse("F", "FFFF", new Date(2002, 5, 4), 1543, [], "NAC", 0.9);
 
   nurseA.pastSchedule2019.savePastSchedule([new Date(2019, 9, 5), new Date(2019, 5, 4), new Date(2019, 1, 4), new Date(2019, 3, 4)]);
+  
   console.log(nurseA.pastSchedule2019.daysWorked);
   console.log(nurseA.pastSchedule2019);
   
