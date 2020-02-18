@@ -65,12 +65,52 @@
             <button id="moreDates">+</button>
             <div id="multipleDates">
 
-            </div>
+            </div> <!--End of dynamically added work dates-->
           </div>
           <button id = "workSubmit" class="btn btn-primary">Submit</button>
         </form>
       </div> <!--End of WorkRequest-->
       
+      <div id="output">
+        <hr>
+        <h2>MVP Output</h2>
+        <h3>Priority List</h3>
+        <h4>Charge Nurses:</h4>
+        <ol id="CNpriority"></ol>
+        <h4>Registered Nurses:</h4>
+        <ol id="RNpriority"></ol>
+        <h4>Nursing Assistants:</h4>
+        <ol id="NACpriority"></ol>
+
+        <h3>Vacation Requests</h3>
+        <table id="outputVacationTable">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Dates</td>
+              <td>Reason</td>
+            </tr>
+          </thead>
+          <tbody id="vacationOutput">
+
+          </tbody>
+          
+        </table>
+
+        <h3>Work Requests</h3>
+        <table id="outputWorkTable">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Dates</td>
+            </tr>
+          </thead>
+          <tbody id="workOutput">
+
+          </tbody>
+
+        </table>
+      </div> <!--End of MVP Output-->
     </div>
   </body>
 </html>
