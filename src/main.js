@@ -31,7 +31,33 @@ function addToPriorityOutput(nurseArray, outputLocation){
       $(eval(`"#${outputLocation}"`)).append(listItem);
     }
   }
-  
+}
+
+function addVactionOutput(nurseArray){
+  for(let i=0; i<nurseArray.length; i++){
+    let currentVacationRequests = nurseArray[i].vacationRequests;
+    if(currentVacationRequests.length > 0){
+      for (let j=0; j<currentVacationRequests.length;j++){
+        let newRow = document.createElement('tr');
+        newRow.id = "nurse" + i + "VR" + j;
+
+        let name = document.createElement('td');
+        name.innerText = getFullName(nurseArray, i);
+        newRow.appendChild(name);
+
+        let dates = document.createElement('td');
+        dates.innerText = currentVacationRequests[j].vacationStartDate + " to " + currentVacationRequests[j].workReturnDate;
+        newRow.appendChild(dates);
+
+        let reason = document.createElement('td');
+        reason.innerText = currentVacationRequests[j].comments;
+        newRow.appendChild(reason);
+
+        $("#vacationOutput").append(newRow);
+      }
+      
+    }
+  }
 }
 
 $(document).ready(function(){
@@ -84,6 +110,8 @@ $(document).ready(function(){
     console.log(vacationRequest);
     let currentNurse = unit.searchNurse(firstName, lastName);
     currentNurse.addVacationRequest(vacationRequest);
+    $("#vacationOutput").empty();
+    addVactionOutput(unit.nurses);
   });
 
   $("#moreDates").click(function(event){
