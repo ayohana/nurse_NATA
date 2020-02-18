@@ -59,6 +59,27 @@ function addVactionOutput(nurseArray){
     }
   }
 }
+function outputWorkRequest(nurseArray){
+  for (let i=0; i<nurseArray.length; i++){
+    let currentWorkRequests = nurseArray[i].workRequests;
+    if(currentWorkRequests.length>0){
+      for (let j =0; j<currentWorkRequests.length; j++){
+        let newRow = document.createElement('tr');
+        newRow.id = "nurse" + i + "WR" + j;
+
+        let name = document.createElement('td');
+        name.innerText = getFullName(nurseArray,i);
+        newRow.appendChild(name);
+
+        let dates = document.createElement('td');
+        dates.innerText = currentWorkRequests[j].toDateString();
+        newRow.appendChild(dates);
+
+        $("#workOutput").append(newRow);
+      }
+    }
+  }
+}
 
 $(document).ready(function(){
   let unit = new Unit();
@@ -135,6 +156,8 @@ $(document).ready(function(){
         currentNurse.addWorkRequest(dates[i].valueAsDate);
       }
     }
+    $("#workOutput").empty();
+    outputWorkRequest(unit.nurses);
   });
 
 
