@@ -1,3 +1,5 @@
+import { PastSchedule } from "./past-schedule";
+
 export class Nurse{
   constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
     this.firstName = firstName.toLowerCase();
@@ -9,6 +11,8 @@ export class Nurse{
     this.fte = fte;
     this.vacationRequests = [];
     this.workRequests = [];
+    this.pastSchedule2018 = new PastSchedule();
+    this.pastSchedule2019 = new PastSchedule();
     this.rolePriority = 0;
     this.groupPriority = 0;
   }
