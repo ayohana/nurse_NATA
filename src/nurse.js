@@ -28,8 +28,12 @@ export class Nurse{
     }
   }
 
-  addVacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
+  addVacationRequestTest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
+    this.vacationRequests.push(vacationRequest);
+  }
+
+  addVacationRequest(vacationRequest){
     this.vacationRequests.push(vacationRequest);
   }
 

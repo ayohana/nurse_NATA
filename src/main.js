@@ -115,9 +115,9 @@ $(document).ready(function(){
   nurseB.pastSchedule2019.savePriorVacationDates([new Date(2019, 6, 2), new Date(2019, 6, 3), new Date(2019, 6, 4), new Date(2019, 6, 5), new Date(2019, 6, 6)]);
   nurseC.pastSchedule2019.savePriorVacationDates([]);
   
-  nurseA.addVacationRequest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
-  nurseB.addVacationRequest("B", "Class", new Date(2020, 1, 17), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
-  nurseC.addVacationRequest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+  nurseA.addVacationRequestTest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+  nurseB.addVacationRequestTest("B", "Class", new Date(2020, 1, 17), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
+  nurseC.addVacationRequestTest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
 
   console.log(unit);
   console.log(nurseA);
