@@ -28,6 +28,7 @@ export class Nurse{
     }
   }
 
+  // Remove function below when tests are complete!
   addVacationRequestTest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
     this.vacationRequests.push(vacationRequest);
@@ -62,6 +63,8 @@ export class Nurse{
       return `Work request succesfully submitted!`;
     }
   }
+
+  
 
 
 
