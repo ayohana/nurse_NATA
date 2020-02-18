@@ -59,7 +59,7 @@ function addVactionOutput(nurseArray){
     }
   }
 }
-function outputWorkRequest(nurseArray){
+function addWorkRequestOutput(nurseArray){
   for (let i=0; i<nurseArray.length; i++){
     let currentWorkRequests = nurseArray[i].workRequests;
     if(currentWorkRequests.length>0){
@@ -157,7 +157,7 @@ $(document).ready(function(){
       }
     }
     $("#workOutput").empty();
-    outputWorkRequest(unit.nurses);
+    addWorkRequestOutput(unit.nurses);
   });
 
 
