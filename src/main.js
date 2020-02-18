@@ -59,6 +59,7 @@ function addVactionOutput(nurseArray){
     }
   }
 }
+
 function addWorkRequestOutput(nurseArray){
   for (let i=0; i<nurseArray.length; i++){
     let currentWorkRequests = nurseArray[i].workRequests;
