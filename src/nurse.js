@@ -29,6 +29,7 @@ export class Nurse{
     }
   }
 
+  // Remove function below when tests are complete!
   addVacationRequestTest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
     this.vacationRequests.push(vacationRequest);
@@ -42,14 +43,7 @@ export class Nurse{
     this.workRequests.push(workRequest);
   }
 
-
   // (Separate function?) Schedule holiday for CN first, RN second, NAC third
-
-  // Analyze work request:
-    // 1 If work request is submitted after the deadline, do not analyze the request
-    // 2 Plug in work request to calendar so that other nurses who requested off can get a chance to have those dates off
-
-
 
   // Analyze vacation request:
 

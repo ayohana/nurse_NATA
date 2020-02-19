@@ -5,6 +5,7 @@ export class VacationRequest {
     this.submissionDate = submissionDate;
     this.vacationStartDate = vacationStartDate;
     this.workReturnDate = workReturnDate;
+    this.vacationReqDateRange = [];
     this.workDaysRequestedOff = workDaysRequestedOff;
     this.vacationHoursAvailable = vacationHoursAvailable;
     this.comments = comments;
@@ -22,6 +23,25 @@ export class VacationRequest {
     } else {
       this.adequateVacationHours = false;
     }
+  }
+
+  checkVacationRequest(requestDueDate){
+    if (this.submissionDate > requestDueDate) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  getDateRange() {  // Where and when to call this method?
+    let start = this.vacationStartDate;
+    let end = this.workReturnDate;
+
+    for (var range = [], i = start; i <= end; i.setDate(i.getDate()+1)) {
+      range.push(new Date(i));
+    }
+    console.log(range);
+    this.vacationReqDateRange = range;
   }
 
 }

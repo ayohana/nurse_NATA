@@ -59,6 +59,7 @@ function addVactionOutput(nurseArray){
     }
   }
 }
+
 function addWorkRequestOutput(nurseArray){
   for (let i=0; i<nurseArray.length; i++){
     let currentWorkRequests = nurseArray[i].workRequests;
@@ -81,16 +82,17 @@ function addWorkRequestOutput(nurseArray){
   }
 }
 
+function convertDateInput(input){
+  return new Date(input.replace(/-/g, '/'));
+}
+
 $(document).ready(function(){
   let unit = new Unit();
-  unit.requestDueDate = new Date(2020, 1, 17);
-  unit.holidays2018 = [new Date(2020, 6, 4), new Date(2020, 8, 3)];
-  unit.holidays2019 = [new Date(2020, 6, 4), new Date(2020, 8, 2)];
-  unit.holidays2020 = [new Date(2020, 6, 4), new Date(2020, 8, 7)];
-
+  unit.requestDueDate = new Date(); // Request Due Date: Current Date
+  $("#dueDate").attr('value', unit.requestDueDate.toISOString().substr(0,10));
   let workDates = 1;
 
-  let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], [], "NAC", 0.6);
+  let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], "NAC", 0.6);
   let nurseB = new Nurse("B", "Class", new Date(2011, 2, 1), 3456, [1/3], "NAC", 0.6);
   let nurseC = new Nurse("C", "Name", new Date(2005, 1, 2), 2345, [1/2], "NAC", 0.9);
   let nurseD = new Nurse("D", "Rank", new Date(2008, 3, 4), 543, [], "NAC", 0.3);
@@ -120,34 +122,50 @@ $(document).ready(function(){
   nurseB.pastSchedule2019.savePriorVacationDates([new Date(2019, 6, 2), new Date(2019, 6, 3), new Date(2019, 6, 4), new Date(2019, 6, 5), new Date(2019, 6, 6)]);
   nurseC.pastSchedule2019.savePriorVacationDates([]);
   
-  nurseA.addVacationRequestTest("A", "Last", new Date(2020, 1, 17), new Date(2020, 6, 1), new Date(2020, 6, 15), 3, 100, "test1");
-  nurseB.addVacationRequestTest("B", "Class", new Date(2020, 1, 17), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
+  nurseA.addVacationRequestTest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1"); // Request Date: 1/17/20
+  nurseB.addVacationRequestTest("B", "Class", new Date(2020, 1, 15), new Date(2020, 6, 2), new Date(2020, 6, 10), 3, 100, "test1");
   nurseC.addVacationRequestTest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
 
-  nurseA.compareWithPriorVacations();
-  
+  // nurseB.vacationRequests[0].getDateRange();
+
+  nurseB.compareWithPriorVacations();
 
   console.log(unit);
   console.log(nurseA);
   console.log(nurseB);
   console.log(nurseC);
 
+  $("#dueDateButton").click(function(event){
+    event.preventDefault();
+    unit.requestDueDate = $("#dueDate").val();
+    $("#dateChanged").text("Date Changed to " + unit.requestDueDate);
+  });
+
   $("form#vacationForm").submit(function(event){
     event.preventDefault();
     let firstName = $("#firstName").val();
     let lastName = $("#lastName").val();
-    let submissionDate = $("#submissionDate").val();
-    let vacationStartDate = $("#vacationStartDate").val();
-    let workReturnDate = $("#workReturnDate").val();
+    let submissionDate = convertDateInput($("#submissionDate").val());
+    console.log("test date submission",submissionDate);
+    let vacationStartDate = convertDateInput($("#vacationStartDate").val());
+    let workReturnDate = convertDateInput($("#workReturnDate").val());
     let workDaysRequestedOff = $("#workDaysRequestedOff").val();
     let vacationHoursAvailable = $("#vacationHoursAvailable").val();
     let comments = $("#comments").val();
+
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
+
     vacationRequest.checkVacationHoursAvailable();
     let currentNurse = unit.searchNurse(firstName, lastName);
-    currentNurse.addVacationRequest(vacationRequest);
-    $("#vacationOutput").empty();
-    addVactionOutput(unit.nurses);
+    if (vacationRequest.checkVacationRequest(unit.requestDueDate)){
+      currentNurse.addVacationRequest(vacationRequest);
+      $("#vacationOutput").empty();
+      addVactionOutput(unit.nurses);
+      $("#vacationMessage").text("Vacation request succesfully submitted!");
+    } else {
+      $("#vacationMessage").text(`Vacation request is past the submission due date: ${unit.requestDueDate.toDateString()}.`);
+    }
+    
   });
 
   $("#moreDates").click(function(event){
@@ -161,6 +179,7 @@ $(document).ready(function(){
 
   $("#workSubmit").click(function(event){
     event.preventDefault();
+    $("#workMessage").text("");
     let firstNameWork = $("#firstNameWork").val();
     let lastNameWork = $("#lastNameWork").val();
     let currentNurse = unit.searchNurse(firstNameWork, lastNameWork);
@@ -168,6 +187,7 @@ $(document).ready(function(){
     for (let i=0; i<dates.length; i++){
       if(dates[i].valueAsDate != null){
         currentNurse.addWorkRequest(dates[i].valueAsDate);
+        $("#workMessage").append(`Work request for ${dates[i].valueAsDate.toISOString().substr(0,10)} succesfully submitted!`);
       }
     }
     $("#workOutput").empty();
