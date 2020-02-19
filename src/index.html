@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <title>NursSync</title>
   </head>
   <body>
@@ -18,6 +18,7 @@
         <p><span id="dateChanged"></span></p>
         <hr>
       </div>
+
       <div id="vacationRequest">
         <h2>Add Vacation Request</h2>
         <form id="vacationForm">
@@ -54,6 +55,7 @@
           <p><span id="vacationMessage"></span></p>
         </form>
       </div> <!--End of Vacation Request-->
+
       <hr>
       <div id="workRequest">
         <h2>Add Work Request</h2>
@@ -89,36 +91,43 @@
         <ol id="NACpriority"></ol>
 
         <h3>All Vacation Requests</h3>
-        <table id="outputVacationTable">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Dates</td>
-              <td>Reason</td>
-            </tr>
-          </thead>
-          <tbody id="vacationOutput">
-
-          </tbody>
-          
-        </table>
+        <div id="allVacationOutput">
+          <table id="outputVacationTable">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Dates</td>
+                <td>Reason</td>
+              </tr>
+            </thead>
+            <tbody id="vacationOutput">
+  
+            </tbody> <!--End of dynamically added vacation requests-->
+          </table>
+          <button id="vacationByName">Sort By Name</button>
+          <button id="vacationByDate">Sort By Start Date</button>
+        </div>
         <p><span id="outputVacationMessage"></span></p>
 
         <h3>All Work Requests</h3>
-        <table id="outputWorkTable">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Dates</td>
-            </tr>
-          </thead>
-          <tbody id="workOutput">
-
-          </tbody>
-
-        </table>
+        <div id="allWorkOutput">
+          <table id="outputWorkTable">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Date</td>
+              </tr>
+            </thead>
+            <tbody id="workOutput">
+  
+            </tbody> <!--End of dynamically added work requests-->
+          </table>
+          <button id="workByName">Sort By Name</button>
+          <button id="workByDate">Sort By Date</button>
+        </div>
         <p><span id="outputWorkMessage"></span></p>
       </div> <!--End of MVP Output-->
+
       <hr>
       <div id="requestsPrioritized">
         <h2>Prioritized Requests</h2>
