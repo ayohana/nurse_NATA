@@ -1,0 +1,32 @@
+body{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1{
+  font-family: 'Lobster', cursive;
+  font-weight: bold;
+  font-size: 40pt;
+}
+
+h2{
+  text-align: center;
+}
+
+table, td{
+  border: 1px solid black;
+}
+
+table{
+  min-width: 50%;
+}
+
+thead{
+  font-weight: bold;
+}
+
+.jumbotron{
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #a177bf
+}
