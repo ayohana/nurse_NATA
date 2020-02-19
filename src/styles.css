@@ -10,6 +10,8 @@ h1{
 
 h2{
   text-align: center;
+  background-color: #dddddd;
+  background-image: linear-gradient(-90deg, #c69de3, white);
 }
 
 table, td{
@@ -24,9 +26,29 @@ thead{
   font-weight: bold;
 }
 
+tr:hover{
+  background-color: #dddddd;
+}
+
+li:nth-child(even){
+  background-color: #dddddd;
+}
+
 .jumbotron{
   text-align: center;
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #a177bf
+}
+
+.workDates{
+  margin: 10px;
+}
+
+#workDaysRequestedOff{
+  width: 50px;
+}
+
+#vacationHoursAvailable{
+  width: 100px;
 }

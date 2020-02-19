@@ -22,11 +22,8 @@
         <h2>Add Vacation Request</h2>
         <form id="vacationForm">
           <div class="form-group">
-            <label for="firstName">Enter Staff's <strong>First Name</strong>:</label>
+            <label for="name">Enter Staff's <strong>Name</strong>:</label>
             <input type="text" id="firstName" placeholder="first name">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Enter Staff's <strong>Last Name</strong>:</label>
             <input type="text" id="lastName" placeholder="last name" required>
           </div>
           <div class="form-group">
@@ -42,8 +39,8 @@
             <input type="date" id="workReturnDate" required>
           </div>
           <div class="form-group">
-            <label for="workDaysRequestedOff">Enter Total Number of Days Requested  Off:</label>
-            <input type="number" min=1 id="workDaysRequestedOff">
+            <label for="workDaysRequestedOff">Enter Total Number of <strong>Work Shifts Requested Off</strong>:</label>
+            <input type="number" min=0 id="workDaysRequestedOff">
           </div>
           <div class="form-group">
             <label for="vacationHoursAvailable">Enter Anticipated Vacation Hours Available:</label>
@@ -57,16 +54,13 @@
           <p><span id="vacationMessage"></span></p>
         </form>
       </div> <!--End of Vacation Request-->
-
+      <hr>
       <div id="workRequest">
         <h2>Add Work Request</h2>
         <form id="workForm">
           <div class="form-group">
-            <label for="firstNameWork">Enter Staff's <strong>First Name</strong>:</label>
+            <label for="nameWork">Enter Staff's <strong>Name</strong>:</label>
             <input type="text" id="firstNameWork" placeholder="first name">
-          </div>
-          <div class="form-group">
-            <label for="lastNameWork">Enter Staff's <strong>Last Name</strong>:</label>
             <input type="text" id="lastNameWork" placeholder="last name" required>
           </div>
           <div class="form-group">
@@ -108,6 +102,7 @@
           </tbody>
           
         </table>
+        <p><span id="outputVacationMessage"></span></p>
 
         <h3>All Work Requests</h3>
         <table id="outputWorkTable">
@@ -122,12 +117,15 @@
           </tbody>
 
         </table>
+        <p><span id="outputWorkMessage"></span></p>
       </div> <!--End of MVP Output-->
       <hr>
       <div id="requestsPrioritized">
         <h2>Prioritized Requests</h2>
         <p>Vacation requests in priority order when requested dates overlap between nurses.</p>
+        <div id="prioritizedOutput">
 
+        </div>
       </div>
     </div>
   </body>
