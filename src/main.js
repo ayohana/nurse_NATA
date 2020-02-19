@@ -160,7 +160,7 @@ $(document).ready(function(){
       addVactionOutput(unit.nurses);
       $("#vacationMessage").text("Vacation request succesfully submitted!");
     } else {
-      $("#vacationMessage").text(`Vacation request is past the submission due date: ${unit.requestDueDate.toDateString()}. Please manually check if requested dates are still available.`);
+      $("#vacationMessage").text(`Vacation request is past the submission due date: ${unit.requestDueDate.toDateString()}.`);
     }
     
   });
@@ -176,6 +176,7 @@ $(document).ready(function(){
 
   $("#workSubmit").click(function(event){
     event.preventDefault();
+    $("#workMessage").text("");
     let firstNameWork = $("#firstNameWork").val();
     let lastNameWork = $("#lastNameWork").val();
     let currentNurse = unit.searchNurse(firstNameWork, lastNameWork);
@@ -183,6 +184,7 @@ $(document).ready(function(){
     for (let i=0; i<dates.length; i++){
       if(dates[i].valueAsDate != null){
         currentNurse.addWorkRequest(dates[i].valueAsDate);
+        $("#workMessage").append(`Work request for ${dates[i].valueAsDate.toISOString().substr(0,10)} succesfully submitted!`);
       }
     }
     $("#workOutput").empty();

@@ -3,7 +3,7 @@ export class PastSchedule {
 		this.daysWorked = [];
 		this.priorVacationDates = [];
 	}
-
+	
 	savePastSchedule(datesWorked){
 		datesWorked.sort(function(a, b){return a-b});
 		this.daysWorked.push(datesWorked);

@@ -25,7 +25,6 @@ export class VacationRequest {
     }
   }
 
-
   checkVacationRequest(requestDueDate){
     // console.log("vacation date",this.submissionDate);
     // console.log("due date", requestDueDate);

@@ -44,28 +44,6 @@ export class Nurse{
 
   // (Separate function?) Schedule holiday for CN first, RN second, NAC third
 
-  // Analyze work request:
-    // 1 If vacation request is submitted after the deadline, do not analyze the request. Scheduler checks manually
-    // 2 Plug in work request to calendar so that other nurses who requested off can get a chance to have those dates off
-
-  
-
-  checkWorkRequest(requestDueDate){
-    if (this.workRequests[this.workRequests.length-1].submissionDate > requestDueDate) {
-      return `Work request is past the submission due date: ${requestDueDate.toDateString()}. Please manually check if requested work date is still available or if another staff member wants to have the day off.`;
-    } else {
-      return `Work request succesfully submitted!`;
-    }
-  }
-
-  
-
-
-
-  
-
-
-
   // Analyze vacation request:
 
   analyzeVacationRequest(groupOfNurses){
