@@ -10,9 +10,9 @@ export class Unit{
     this.sortedRegisteredNurses = [];
     this.sortedNursingAssistants = [];
     this.requestDueDate;
-    this.holidays2020;
-    this.holidays2019;
-    this.holidays2018;
+    this.holidays2020 = [new Date("2020/07/04"), new Date("2020/09/07")];
+    this.holidays2019 = [new Date("2019/07/04"), new Date("2019/09/02")];
+    this.holidays2018 = [new Date("2018/07/04"), new Date("2018/09/03")];
   }
 
   addNurse(nurse){

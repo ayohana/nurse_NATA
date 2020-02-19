@@ -50,30 +50,29 @@ export class Nurse{
   // nurses.Role = unit.sortedNursingAssistants (for instance)
   // nurse.vacationRequest[0].vacationReqDateRange
 
-  analyzeVacationRequest(nursesRole, holidays){
-    this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates);
-    this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
-    this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked, holidays);
-    this.compareWithPastHolidaysWorked(this.pastSchedule2018.daysWorked, holidays);
-    this.compareWithOtherVacationRequests(nursesRole);
+  // analyzeVacationRequest(nursesRole, holidays){
+  analyzeVacationRequest(){
+
+    //check for empty arrays - if empty, return no overlapping dates for instance
+    this.vacationRequests[0].getDateRange();
+    console.log("overlap"+this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates[0]));
+    // this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
+    // this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked, holidays);
+    // this.compareWithPastHolidaysWorked(this.pastSchedule2018.daysWorked, holidays);
+    // this.compareWithOtherVacationRequests(nursesRole);
   }
 
-  // this.vacationRequests should be changed to range of vacationRequests
- 
-  // 1 Analyze 2 years past schedule to see their vacation dates
-
   compareWithPriorVacations(priorVacationDates){
-
-    let vacationRequest = this.vacationRequests[0].vacationReqDateRange
-    console.log(this.vacationRequests);
-
+    let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
+    let overlapDates = [];
     for (let i=0; i < vacationRequest.length; i++){
       for (let j=0; j < priorVacationDates.length; j++) {
-        if (vacationRequest[i].getDate() === priorVacationDates[j].getDate() && this.vacationRequests[i].getMonth() === priorVacationDates[j].getMonth()){
-          return console.log(`Vacations dates overlaped with ${priorVacationDates[j]}`);
+        if (vacationRequest[i].getDate() === priorVacationDates[j].getDate() && vacationRequest[i].getMonth() === priorVacationDates[j].getMonth()){
+          overlapDates.push(priorVacationDates[j]);
         }
       }
     }
+    return overlapDates;
   }
 
   // 2 Analyze 2 years past schedule to see their past holidays worked (same priority with #2)
@@ -81,13 +80,18 @@ export class Nurse{
   // 
   compareWithPastHolidaysWorked(daysWorked, holidays){
 
-    let vacationRequest = this.vacationRequest[0].vacationReqDateRange
+    let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
+    console.log(vacationRequest);
+    console.log(holidays);
+    console.log(daysWorked);
 
     for (let i=0; i < vacationRequest.length; i++){
       for (let j=0; j < holidays.length; j++) {
       if (vacationRequest[i].getTime() === holidays[j].getTime() ){
+        console.log (vacationRequest[i].getTime() === holidays[j].getTime()) 
         for (let k=0; k < daysWorked.length; k++)
-          if (vacationRequest[i].getDate() != daysWorked[k].getDate() && vacationRequest[i].getMonth() != daysWorked[k].getMonth() ){
+          if (vacationRequest[i].getDate() != daysWorked[k].getDate() && vacationRequest[i].getMonth() != daysWorked[k].getMonth() ){  
+
             return console.log(`You didn't work this holiday ${daysWorked[k]} `);
           }
         }
