@@ -1,6 +1,5 @@
 import { PastSchedule } from "./past-schedule";
 import { VacationRequest } from "./vacation-request";
-import { Unit } from "./unit";
 
 export class Nurse{
   constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
@@ -49,6 +48,7 @@ export class Nurse{
 
   // holidays = unit.holidays2020
   // nurses.Role = unit.sortedNursingAssistants (for instance)
+  // nurse.vacationRequest[0].vacationReqDateRange
   analyzeVacationRequest(nursesRole, holidays){
     this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates);
     this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
@@ -62,6 +62,8 @@ export class Nurse{
   // 1 Analyze 2 years past schedule to see their vacation dates
 
   compareWithPriorVacations(priorVacationDates){
+
+    
 
     for (let i=0; i < this.vacationRequests.length; i++){
       for (let j=0; j < priorVacationDates.length; j++) {
