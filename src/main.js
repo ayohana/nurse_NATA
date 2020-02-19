@@ -128,7 +128,7 @@ $(document).ready(function(){
 
   // nurseB.vacationRequests[0].getDateRange();
 
-  nurseB.compareWithPriorVacations();
+  nurseB.compareWithPriorVacations(nurseB.pastSchedule2019.priorVacationDates);
 
   console.log(unit);
   console.log(nurseA);

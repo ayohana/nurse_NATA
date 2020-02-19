@@ -49,6 +49,7 @@ export class Nurse{
   // holidays = unit.holidays2020
   // nurses.Role = unit.sortedNursingAssistants (for instance)
   // nurse.vacationRequest[0].vacationReqDateRange
+
   analyzeVacationRequest(nursesRole, holidays){
     this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates);
     this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
@@ -63,11 +64,12 @@ export class Nurse{
 
   compareWithPriorVacations(priorVacationDates){
 
-    
+    let vacationRequest = this.vacationRequests[0].vacationReqDateRange
+    console.log(this.vacationRequests);
 
-    for (let i=0; i < this.vacationRequests.length; i++){
+    for (let i=0; i < vacationRequest.length; i++){
       for (let j=0; j < priorVacationDates.length; j++) {
-        if (this.vacationRequests[i].getDate() === priorVacationDates[j].getDate() && this.vacationRequests[i].getMonth() === priorVacationDates[j].getMonth()){
+        if (vacationRequest[i].getDate() === priorVacationDates[j].getDate() && this.vacationRequests[i].getMonth() === priorVacationDates[j].getMonth()){
           return console.log(`Vacations dates overlaped with ${priorVacationDates[j]}`);
         }
       }
@@ -79,11 +81,13 @@ export class Nurse{
   // 
   compareWithPastHolidaysWorked(daysWorked, holidays){
 
-    for (let i=0; i < this.vacationRequests.length; i++){
+    let vacationRequest = this.vacationRequest[0].vacationReqDateRange
+
+    for (let i=0; i < vacationRequest.length; i++){
       for (let j=0; j < holidays.length; j++) {
-      if (this.vacationRequests[i].getTime() === holidays[j].getTime() ){
+      if (vacationRequest[i].getTime() === holidays[j].getTime() ){
         for (let k=0; k < daysWorked.length; k++)
-          if (this.vacationRequests[i].getDate() != daysWorked[k].getDate() && this.vacationRequests[i].getMonth() != daysWorked[k].getMonth() ){
+          if (vacationRequest[i].getDate() != daysWorked[k].getDate() && vacationRequest[i].getMonth() != daysWorked[k].getMonth() ){
             return console.log(`You didn't work this holiday ${daysWorked[k]} `);
           }
         }
@@ -98,12 +102,14 @@ export class Nurse{
   // Returns approval/rejection with the dates
 
   compareWithOtherVacationRequests(nursesRole){
+
+    let vacationRequest = this.vacationRequest[0].vacationReqDateRange
   
-    for (let i=0; i < this.vacationRequests.length; i++){
+    for (let i=0; i < vacationRequest.length; i++){
       for (let j=0; j < nursesRole.length; j++) {
         for (let k=0; k < nursesRole[j].vacationRequests.length; k++){
-          if (this.vacationRequests[i].getTime() === nursesRole[j].vacationRequests[k].getTime()){
-            return console.log(`Day ${this.vacationRequests[i]} overlapped with other nurse request`);
+          if (vacationRequest[i].getTime() === nursesRole[j].vacationRequests[k].getTime()){
+            return console.log(`Day ${vacationRequest[i]} overlapped with other nurse request`);
           }
         }
       }
