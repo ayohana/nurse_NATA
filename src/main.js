@@ -97,6 +97,7 @@ $(document).ready(function(){
   let nurseE = new Nurse("E", "EEEE", new Date(2018, 1, 4), 5432, [], "NAC", 0.9);
   let nurseF = new Nurse("F", "FFFF", new Date(2002, 5, 4), 1543, [], "NAC", 0.9);
 
+
   addNurseToUnit(nurseA, unit);
   addNurseToUnit(nurseB, unit);
   addNurseToUnit(nurseC, unit);
@@ -120,8 +121,12 @@ $(document).ready(function(){
   nurseC.pastSchedule2019.savePriorVacationDates([]);
   
   nurseA.addVacationRequestTest("A", "Last", new Date(2020, 1, 17), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1"); // Request Date: 1/17/20
-  nurseB.addVacationRequestTest("B", "Class", new Date(2020, 1, 15), new Date(2020, 5, 15), new Date(2020, 5, 30), 3, 100, "test1");
+  nurseB.addVacationRequestTest("B", "Class", new Date(2020, 1, 15), new Date(2020, 6, 2), new Date(2020, 6, 10), 3, 100, "test1");
   nurseC.addVacationRequestTest("C", "Name", new Date(2020, 1, 20), new Date(2020, 5, 1), new Date(2020, 5, 15), 3, 100, "test1");
+
+  // nurseB.vacationRequests[0].getDateRange();
+
+  nurseB.compareWithPriorVacations();
 
   console.log(unit);
   console.log(nurseA);
