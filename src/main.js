@@ -132,7 +132,7 @@ $(document).ready(function(){
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
   // nurseA.pastSchedule2019.savePastSchedule([new Date("2019/06/01"), new Date("2019/06/02"), new Date("2019/06/04")]);
-  nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/20"), new Date("2019/7/21"), new Date("2019/07/22"), new Date("2019/07/23"), new Date("2019/07/24")]);
+  nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/4"), new Date("2019/7/21"), new Date("2019/07/22"), new Date("2019/07/23"), new Date("2019/07/24")]);
   // nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
   // nurseA.pastSchedule2019.savePriorVacationDates([]);
   nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03")]);
@@ -144,7 +144,7 @@ $(document).ready(function(){
   // nurseC.addVacationRequestTest("C", "Name", new Date("2020/01/20"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
 
  
-  nurseB.analyzeVacationRequest();
+  nurseB.analyzeVacationRequest(unit.holidays2020);
   // console.log("overlap:" + nurseB.compareWithPriorVacations(nurseB.pastSchedule2019.priorVacationDates[0]));
 
   console.log(nurseB.pastSchedule2019.daysWorked[0])
