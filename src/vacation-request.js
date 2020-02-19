@@ -26,15 +26,12 @@ export class VacationRequest {
   }
 
   checkVacationRequest(requestDueDate){
-    // console.log("vacation date",this.submissionDate);
-    // console.log("due date", requestDueDate);
-    if (this.submissionDate > requestDueDate.toISOString().substr(0,10)) {
+    if (this.submissionDate > requestDueDate) {
       return false;
     } else {
       return true;
     }
   }
-
 
   getDateRange() {  // Where and when to call this method?
     let start = this.vacationStartDate;

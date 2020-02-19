@@ -82,7 +82,9 @@ function addWorkRequestOutput(nurseArray){
   }
 }
 
-
+function convertDateInput(input){
+  return new Date(input.replace(/-/g, '/'));
+}
 
 $(document).ready(function(){
   let unit = new Unit();
@@ -90,7 +92,7 @@ $(document).ready(function(){
   $("#dueDate").attr('value', unit.requestDueDate.toISOString().substr(0,10));
   let workDates = 1;
 
-  let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], [], "NAC", 0.6);
+  let nurseA = new Nurse("A", "Last", new Date(2000, 1, 2), 1234, [2/3, 4/5], "NAC", 0.6);
   let nurseB = new Nurse("B", "Class", new Date(2011, 2, 1), 3456, [1/3], "NAC", 0.6);
   let nurseC = new Nurse("C", "Name", new Date(2005, 1, 2), 2345, [1/2], "NAC", 0.9);
   let nurseD = new Nurse("D", "Rank", new Date(2008, 3, 4), 543, [], "NAC", 0.3);
@@ -143,9 +145,10 @@ $(document).ready(function(){
     event.preventDefault();
     let firstName = $("#firstName").val();
     let lastName = $("#lastName").val();
-    let submissionDate = $("#submissionDate").val();
-    let vacationStartDate = $("#vacationStartDate").val();
-    let workReturnDate = $("#workReturnDate").val();
+    let submissionDate = convertDateInput($("#submissionDate").val());
+    console.log("test date submission",submissionDate);
+    let vacationStartDate = convertDateInput($("#vacationStartDate").val());
+    let workReturnDate = convertDateInput($("#workReturnDate").val());
     let workDaysRequestedOff = $("#workDaysRequestedOff").val();
     let vacationHoursAvailable = $("#vacationHoursAvailable").val();
     let comments = $("#comments").val();
