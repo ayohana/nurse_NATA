@@ -86,8 +86,40 @@ function convertDateInput(input){
   return new Date(input.replace(/-/g, '/'));
 }
 
+function checkEnd(){
+  let endDate = convertDateInput($("#workReturnDate").val());
+  let startDate = convertDateInput($("#vacationStartDate").val());
+  if (endDate != "" && endDate < startDate){
+    alert("Start date must be before end date.");
+  }
+}
+
 $(document).ready(function(){
   let unit = new Unit();
+  $("#allVacationOutput").hide();
+  $("#outputVacationMessage").show();
+  $("#allWorkOutput").hide();
+  $("#outputWorkMessage").show();
+
+  document.getElementById("vacationStartDate").addEventListener("input", function(){
+    let endDate = convertDateInput($("#workReturnDate").val());
+    let startDate = convertDateInput($("#vacationStartDate").val());
+    if (endDate != "" && endDate < startDate){
+      alert("Start date must be before end date.");
+      // $("#vacationStartDate").attr('value',endDate.toISOString().substr(0,10));
+      //Doesn't work, need to change date or disable from submitting
+    }
+  });
+  document.getElementById("workReturnDate").addEventListener("input", function(){
+    let endDate = convertDateInput($("#workReturnDate").val());
+    let startDate = convertDateInput($("#vacationStartDate").val());
+    if (startDate != "" && endDate < startDate){
+      alert("Start date must be before end date.");
+      // $("#workReturnDate").attr('value',startDate.toISOString().substr(0,10));
+      //Doesn't work, need to change date or disable from submitting
+    }
+  });
+
   unit.requestDueDate = new Date(); // Request Due Date: Current Date
   $("#dueDate").attr('value', unit.requestDueDate.toISOString().substr(0,10));
   let workDates = 1;
@@ -175,6 +207,8 @@ $(document).ready(function(){
     if (vacationRequest.checkVacationRequest(unit.requestDueDate)){
       currentNurse.addVacationRequest(vacationRequest);
       $("#vacationOutput").empty();
+      $("#allVacationOutput").show();
+      $("#outputVacationMessage").hide();
       addVactionRequestOutput(unit.nurses);
       $("#vacationMessage").text("Vacation request succesfully submitted!");
     } else {
@@ -195,21 +229,33 @@ $(document).ready(function(){
   $("#workSubmit").click(function(event){
     event.preventDefault();
     $("#workMessage").text("");
+    $("#allWorkOutput").show();
+    $("#outputWorkMessage").hide();
     let firstNameWork = $("#firstNameWork").val();
     let lastNameWork = $("#lastNameWork").val();
     let currentNurse = unit.searchNurse(firstNameWork, lastNameWork);
-    let dates = document.getElementsByClassName("workDates");
 
+    let dates = document.getElementsByClassName("workDates");
     for (let i=0; i<dates.length; i++){
       let dateObj = convertDateInput(dates[i].value);
       if(dates[i].valueAsDate != null){
         currentNurse.addWorkRequest(dateObj);
-        $("#workMessage").append(`Work request for ${dateObj.toDateString()} succesfully submitted!`);
+        $("#workMessage").append(`<p>Work request for ${dateObj.toDateString()} succesfully submitted!</p>`);
       }
     }
     $("#workOutput").empty();
     addWorkRequestOutput(unit.nurses);
   });
 
+  $("#vacationByName").click(function(event){
+    event.preventDefault();
+    $("#vacationOutput").empty();
+    addVactionRequestOutput(unit.nurses);
+  });
 
+  $("#workByName").click(function(event){
+    event.preventDefault();
+    $("#workOutput").empty();
+    addWorkRequestOutput(unit.nurses);
+  });
 });
