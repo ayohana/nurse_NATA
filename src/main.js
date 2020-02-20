@@ -12,7 +12,7 @@ function addNurseToUnit(nurse, unit){
   unit.addNurse(nurse);
 }
 
-// Return Full Name in Uppercase
+// Return Full Name in Uwpercase
 function getFullName(array, position){
   return array[position].firstName.toUpperCase() + " " + array[position].lastName.toUpperCase();
 }
