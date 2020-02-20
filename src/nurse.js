@@ -31,10 +31,12 @@ export class Nurse{
   // Remove function below when tests are complete!
   addVacationRequestTest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
+    vacationRequest.getDateRange();
     this.vacationRequests.push(vacationRequest);
   }
 
   addVacationRequest(vacationRequest){
+    vacationRequest.getDateRange();
     this.vacationRequests.push(vacationRequest);
   }
 
@@ -42,32 +44,11 @@ export class Nurse{
     this.workRequests.push(workRequest);
   }
 
-  // (Separate function?) Schedule holiday for CN first, RN second, NAC third
-
-  // Analyze vacation request:
-
-  // holidays = unit.holidays2020
-  // nurses.Role = unit.sortedNursingAssistants (for instance)
-  // nurse.vacationRequest[0].vacationReqDateRange
-
-  // analyzeVacationRequest(nursesRole, holidays){
-  analyzeVacationRequest(holidays){
-
-    //check for empty arrays - if empty, return no overlapping dates for instance
-    this.vacationRequests[0].getDateRange();
-    this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates[0]);
-    // this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
-    this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked[0], holidays);
-    // this.compareWithPastHolidaysWorked(this.pastSchedule2018.daysWorked, holidays);
-    // this.compareWithOtherVacationRequests(nursesRole);
-  }
-
-  compareWithPriorVacations(priorVacationDates){
-    let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
+  compareWithPriorVacations(vacReqDateRange, priorVacationDates){
     let overlapDates = [];
-    for (let i=0; i < vacationRequest.length; i++){
-      for (let j=0; j < priorVacationDates.length; j++) {
-        if (vacationRequest[i].getDate() === priorVacationDates[j].getDate() && vacationRequest[i].getMonth() === priorVacationDates[j].getMonth()){
+    for (let i = 0; i < vacReqDateRange.length; i++){
+      for (let j = 0; j < priorVacationDates.length; j++) {
+        if (vacReqDateRange[i].getDate() === priorVacationDates[j].getDate() && vacReqDateRange[i].getMonth() === priorVacationDates[j].getMonth()){
           overlapDates.push(priorVacationDates[j]);
         }
       }
@@ -75,16 +56,21 @@ export class Nurse{
     return overlapDates;
   }
 
-  compareWithPastHolidaysWorked(daysWorked, holidays){
-    let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
+  compareWithPastHolidaysWorked(vacReqDateRange, daysWorked, holidays){
     let workedPastHolidayDates = [];
-    for (let i=0; i < vacationRequest.length; i++){
-      for (let j=0; j < holidays.length; j++) {
-        if (vacationRequest[i].getTime() === holidays[j].getTime() ){
-          for (let k=0; k < daysWorked.length; k++){
-            if (vacationRequest[i].getMonth() === daysWorked[k].getMonth() && vacationRequest[i].getDate() === daysWorked[k].getDate()){  
-              workedPastHolidayDates.push("Worked holidays: " + daysWorked[k]);
-            } 
+    let vacReqDate;
+    let pastWorkedDates;
+    for (let i = 0; i < vacReqDateRange.length; i++){
+      for (let j = 0; j < holidays.length; j++) {
+        if (vacReqDateRange[i].getMonth() === holidays[j].getMonth() && vacReqDateRange[i].getDate() === holidays[j].getDate()){
+          if (daysWorked[0] != undefined) {
+            for (let k = 0; k < daysWorked[0].length; k++){
+              vacReqDate = vacReqDateRange[i];
+              pastWorkedDates = daysWorked[0][k];
+              if (vacReqDate.getMonth() === pastWorkedDates.getMonth() && vacReqDate.getDate() === pastWorkedDates.getDate()){  
+                workedPastHolidayDates.push(vacReqDate);
+              } 
+            }
           }
         }
       }
@@ -92,13 +78,4 @@ export class Nurse{
     return workedPastHolidayDates;
   }
 
-  // 3 Comparing nurse A and nurse B vacation requests
-  //if they have same request dates then do #2 and #3
-  //else look into their seniority (FTE, hours worked, etc)
-
-  // Returns approval/rejection with the dates
-
-  
-  
 }
-
