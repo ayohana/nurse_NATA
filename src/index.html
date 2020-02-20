@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <title>NursSync</title>
   </head>
   <body>
     <div class="jumbotron">
       <h1>NursSync</h1>
+      <p>An Application for Assisting Nurse Schedulers in Vacation/Work Requests</p>
     </div>
 
     <div class="container">
@@ -16,59 +18,55 @@
         <p><span id="dateChanged"></span></p>
         <hr>
       </div>
+
       <div id="vacationRequest">
-        <h2>Vacation Request</h2>
+        <h2>Add Vacation Request</h2>
         <form id="vacationForm">
           <div class="form-group">
-            <label for="firstName">Enter staff's first name:</label>
+            <label for="name">Enter Staff's <strong>Name</strong>:</label>
             <input type="text" id="firstName" placeholder="first name">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Enter staff's last name:</label>
             <input type="text" id="lastName" placeholder="last name" required>
           </div>
           <div class="form-group">
-            <label for="submissionDate">Enter date of form submission:</label>
+            <label for="submissionDate">Enter Date of Form Submission:</label>
             <input type="date" id="submissionDate">
           </div>
           <div class="form-group">
-            <label for="vacationStartDate">Enter vacation start date:</label>
-            <input type="date" id="vacationStartDate">
+            <label for="vacationStartDate">Enter <strong>Vacation Start Date</strong>:</label>
+            <input type="date" id="vacationStartDate" required>
           </div>
           <div class="form-group">
-            <label for="workReturnDate">Enter return to work date:</label>
-            <input type="date" id="workReturnDate">
+            <label for="workReturnDate">Enter <strong>Return to Work Date</strong>:</label>
+            <input type="date" id="workReturnDate" required>
           </div>
           <div class="form-group">
-            <label for="workDaysRequestedOff">Enter total number of days requested  off:</label>
-            <input type="text" id="workDaysRequestedOff">
+            <label for="workDaysRequestedOff">Enter Total Number of <strong>Work Shifts Requested Off</strong>:</label>
+            <input type="number" min=0 id="workDaysRequestedOff">
           </div>
           <div class="form-group">
-            <label for="vacationHoursAvailable">Enter anticipated vacation hours available:</label>
-            <input type="text" id="vacationHoursAvailable">
+            <label for="vacationHoursAvailable">Enter Anticipated Vacation Hours Available:</label>
+            <input type="number" min=0 id="vacationHoursAvailable">
           </div>
           <div class="form-group">
-            <label for="comments">Enter additional comments:</label>
-            <input type="text" id="comments">
+            <label for="comments">Enter <strong>Reason for Request</strong>/Additional Comments:</label>
+            <textarea id="comments" rows="4" cols="50"></textarea>
           </div>
           <button id="vacationSubmit" class="btn btn-primary">Submit</button>
           <p><span id="vacationMessage"></span></p>
         </form>
       </div> <!--End of Vacation Request-->
 
+      <hr>
       <div id="workRequest">
-        <h2>Work Request</h2>
+        <h2>Add Work Request</h2>
         <form id="workForm">
           <div class="form-group">
-            <label for="firstNameWork">Enter staff's first name:</label>
+            <label for="nameWork">Enter Staff's <strong>Name</strong>:</label>
             <input type="text" id="firstNameWork" placeholder="first name">
-          </div>
-          <div class="form-group">
-            <label for="lastNameWork">Enter staff's last name:</label>
             <input type="text" id="lastNameWork" placeholder="last name" required>
           </div>
           <div class="form-group">
-            <label for="workDate">Enter date(s) you want to work:</label>
+            <label for="workDate">Enter Date(s) <strong>Want to Work</strong>:</label>
             <input type="date" class="workDates" id="workDate0">
             <button id="moreDates">+</button>
             <div id="multipleDates">
@@ -84,6 +82,7 @@
         <hr>
         <h2>MVP Output</h2>
         <h3>Priority List</h3>
+        <p>Nurse priority for vacations by FTE and then hours worked or hire date depending on type of nurse.</p>
         <h4>Charge Nurses:</h4>
         <ol id="CNpriority"></ol>
         <h4>Registered Nurses:</h4>
@@ -91,35 +90,52 @@
         <h4>Nursing Assistants:</h4>
         <ol id="NACpriority"></ol>
 
-        <h3>Vacation Requests</h3>
-        <table id="outputVacationTable">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Dates</td>
-              <td>Reason</td>
-            </tr>
-          </thead>
-          <tbody id="vacationOutput">
+        <h3>All Vacation Requests</h3>
+        <div id="allVacationOutput">
+          <table id="outputVacationTable">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Dates</td>
+                <td>Reason</td>
+              </tr>
+            </thead>
+            <tbody id="vacationOutput">
+  
+            </tbody> <!--End of dynamically added vacation requests-->
+          </table>
+          <button id="vacationByName">Sort By Name</button>
+          <button id="vacationByDate">Sort By Start Date</button>
+        </div>
+        <p><span id="outputVacationMessage">No Vacation Requests Submitted.</span></p>
 
-          </tbody>
-          
-        </table>
-
-        <h3>Work Requests</h3>
-        <table id="outputWorkTable">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Dates</td>
-            </tr>
-          </thead>
-          <tbody id="workOutput">
-
-          </tbody>
-
-        </table>
+        <h3>All Work Requests</h3>
+        <div id="allWorkOutput">
+          <table id="outputWorkTable">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Date</td>
+              </tr>
+            </thead>
+            <tbody id="workOutput">
+  
+            </tbody> <!--End of dynamically added work requests-->
+          </table>
+          <button id="workByName">Sort By Name</button>
+          <button id="workByDate">Sort By Date</button>
+        </div>
+        <p><span id="outputWorkMessage">No Work Requests Submitted.</span></p>
       </div> <!--End of MVP Output-->
+
+      <hr>
+      <div id="requestsPrioritized">
+        <h2>Prioritized Requests</h2>
+        <p>Vacation requests in priority order when requested dates overlap between nurses.</p>
+        <div id="prioritizedOutput">
+
+        </div> <!--End of Prioritized Overlapping Requests-->
+      </div>
     </div>
   </body>
 </html>
