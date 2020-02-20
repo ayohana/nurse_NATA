@@ -18,16 +18,20 @@ export class VacationRequest {
 
   // Check if nurse has vacation hours available and return boolean
   checkVacationHoursAvailable() {
-    let hoursRequestedOff = parseFloat(this.workDaysRequestedOff * 12);
-    if (this.vacationHoursAvailable >= hoursRequestedOff) {
+    let requestedHours = this.hoursRequestedOff();
+    if (this.vacationHoursAvailable >= requestedHours) {
       this.adequateVacationHours = true;
     } else {
       this.adequateVacationHours = false;
     }
   }
 
+  hoursRequestedOff(){
+    return parseFloat(this.workDaysRequestedOff * 12);
+  }
+
   // Check if vacation request is submitted before due date
-  checkVacationRequest(requestDueDate){
+  checkVacationSubmissionDate(requestDueDate){
     if (this.submissionDate > requestDueDate) {
       return false;
     } else {

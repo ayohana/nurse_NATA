@@ -17,6 +17,11 @@ function getFullName(array, position){
   return array[position].firstName.toUpperCase() + " " + array[position].lastName.toUpperCase();
 }
 
+// Convert input type date strings into our universal Date object format
+function convertDateInput(input){
+  return new Date(input.replace(/-/g, '/'));
+}
+
 // Add Nurses in priority order for MVP output area dynamically
 function addToPriorityOutput(nurseArray, outputLocation){
   if(nurseArray.length === 0){
@@ -85,10 +90,6 @@ function addWorkRequestOutput(nurseArray){
     }
   }
 }
-// Convert input type date strings into our universal Date object format
-function convertDateInput(input){
-  return new Date(input.replace(/-/g, '/'));
-}
 
 // Check if Nurse had prior vacation dates that are the same for last 2 years
 function showPriorVacations(nurse) {
@@ -140,6 +141,7 @@ function showPastHolidaysWorked(nurse, unit) {
   }
 }
 
+// Show message for if there are overlapping vacation request dates within group of a nurse type
 function showStaffOverlapVacReqs(unit, sortedStaff){
   let overlapVacReqs = unit.compareVacationRequests(sortedStaff);
   if ($.isEmptyObject(overlapVacReqs)) {
@@ -261,7 +263,7 @@ $(document).ready(function(){
   });
 
   // When submit vacation form, take in inputs
-  // Check if have enough hours and if no duplicate requests with the same start and end dates
+  // Check if submitted before due date, have enough hours, and no duplicate requests with the same start and end dates for same nurse
   // Add vacation request to nurse and add to MVP All vacation request output area
   $("form#vacationForm").submit(function(event){
     event.preventDefault();
@@ -278,16 +280,22 @@ $(document).ready(function(){
 
     vacationRequest.checkVacationHoursAvailable();
     let currentNurse = unit.searchNurse(firstName, lastName);
-    if (vacationRequest.checkVacationRequest(unit.requestDueDate)){
-      if (currentNurse.vacationRequests.some(request => request.vacationStartDate.getTime() === vacationRequest.vacationStartDate.getTime()) && currentNurse.vacationRequests.some(request => request.workReturnDate.getTime() === vacationRequest.workReturnDate.getTime())){
-        $("#vacationMessage").text("Vacation request already exists!");
+    if (vacationRequest.checkVacationSubmissionDate(unit.requestDueDate)){
+
+      if(vacationRequest.adequateVacationHours === true){
+        if (currentNurse.vacationRequests.some(request => request.vacationStartDate.getTime() === vacationRequest.vacationStartDate.getTime()) && currentNurse.vacationRequests.some(request => request.workReturnDate.getTime() === vacationRequest.workReturnDate.getTime())){
+          $("#vacationMessage").text("Vacation request already exists!");
+        } else {
+          currentNurse.addVacationRequest(vacationRequest);
+          $("#vacationOutput").empty();
+          $("#allVacationOutput").show();
+          $("#outputVacationMessage").hide();
+          addVactionRequestOutput(unit.nurses);
+          $("#vacationMessage").text("Vacation request succesfully submitted!");
+        }
+
       } else {
-        currentNurse.addVacationRequest(vacationRequest);
-        $("#vacationOutput").empty();
-        $("#allVacationOutput").show();
-        $("#outputVacationMessage").hide();
-        addVactionRequestOutput(unit.nurses);
-        $("#vacationMessage").text("Vacation request succesfully submitted!");
+        $("#vacationMessage").text(`Insufficient vacation hours available!  Available Hours: ${vacationHoursAvailable} Requested Hours: ${vacationRequest.hoursRequestedOff()}`);
       }
       
     } else {
@@ -319,6 +327,7 @@ $(document).ready(function(){
     let dates = document.getElementsByClassName("workDates");
     for (let i=0; i<dates.length; i++){
       let dateObj = convertDateInput(dates[i].value);
+
       if(dates[i].valueAsDate != null){
         if (currentNurse.workRequests.some(date => date.getTime() === dateObj.getTime())){
           $("#workMessage").append(`<p>Work request for ${dateObj.toDateString()} already exists!</p>`);
