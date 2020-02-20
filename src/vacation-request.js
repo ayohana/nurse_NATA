@@ -36,7 +36,6 @@ export class VacationRequest {
   getDateRange() {
     let start = new Date(this.vacationStartDate);
     let end = new Date(this.workReturnDate);
-
     for (var range = [], i = start; i <= end; i.setDate(i.getDate()+1)) {
       range.push(new Date(i));
     }
