@@ -223,9 +223,9 @@ $(document).ready(function(){
   // console.log(unit.compareVacationRequests(unit.sortedChargeNurses));
   // console.log(unit);
   // console.log(nurseB.checkVacationRequest());
-  showPriorVacations(nurseA);
-  showPastHolidaysWorked(nurseA, unit);
-  // console.log(unit);
+  // // showPriorVacations(nurseA);
+  // showPastHolidaysWorked(nurseA, unit);
+  // // console.log(unit);
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();
