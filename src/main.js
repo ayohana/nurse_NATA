@@ -229,8 +229,8 @@ $(document).ready(function(){
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();
-    unit.requestDueDate = $("#dueDate").val();
-    $("#dateChanged").text("Date Changed to " + unit.requestDueDate);
+    unit.requestDueDate = convertDateInput($("#dueDate").val());
+    $("#dateChanged").text("Date Changed to " + unit.requestDueDate.toDateString());
   });
 
   $("form#vacationForm").submit(function(event){
