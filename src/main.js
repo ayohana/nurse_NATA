@@ -109,6 +109,7 @@ function showPriorVacations(request, nurse) {
   return workedPastVacDates;
 }
 
+// NOT FINISHED
 // Check if Nurse worked on the holidays in the past 2 years
 function showPastHolidaysWorked(nurse, unit) {
   let workedPastHolidays;
@@ -116,9 +117,9 @@ function showPastHolidaysWorked(nurse, unit) {
     for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
       workedPastHolidays = nurse.compareWithPastHolidaysWorked(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2019.daysWorked, unit.holidays2019);
       if (workedPastHolidays.length === 0) {
-        console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2019.`);
+        // console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2019.`);
       } else {
-        console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2019: ${workedPastHolidays}. They may have their vacation request approved this year.`);
+        // console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2019: ${workedPastHolidays}. They may have their vacation request approved this year.`);
       }
     }
   }
@@ -126,14 +127,15 @@ function showPastHolidaysWorked(nurse, unit) {
     for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
       workedPastHolidays = nurse.compareWithPastHolidaysWorked(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2018.daysWorked, unit.holidays2018);
       if (workedPastHolidays.length === 0) {
-        console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2018.`);
+        // console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2018.`);
       } else {
-        console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2018: ${workedPastHolidays}.`);
+        // console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2018: ${workedPastHolidays}.`);
       }
     }
   }
 }
 
+// NOT FINISHED
 // Show message for if there are overlapping vacation request dates within group of a nurse type
 function showStaffOverlapVacReqs(unit, sortedStaff){
   return unit.compareVacationRequests(sortedStaff);
@@ -361,6 +363,7 @@ $(document).ready(function(){
     addWorkRequestOutput(sorted);
   });
 
+  // NOT FINISHED
   $("#showConflicts").click(function(event){
     event.preventDefault();
     $("#conflictingOutput").show();

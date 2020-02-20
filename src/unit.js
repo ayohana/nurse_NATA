@@ -141,6 +141,7 @@ export class Unit{
     }); 
   }
 
+  // NOT FINISHED
   // Compares between nurses for overlapping dates within the type of nurse and returns an object with both nurses names as a key and the dates that overlap as a value
   compareVacationRequests(sortedStaff){
     let overlapVacationRequests = {};
@@ -157,8 +158,8 @@ export class Unit{
         if (sortedStaff[j].vacationRequests.length != 0) {
           let rangeWithTime = [];
           sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
-          console.log(sortedStaff[staffIndex].vacationRequests[i]);
-          console.log(staffIndex);
+          // console.log(sortedStaff[staffIndex].vacationRequests[i]);
+          // console.log(staffIndex);
           for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
             if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
               staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
