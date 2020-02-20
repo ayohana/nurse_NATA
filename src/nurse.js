@@ -18,6 +18,7 @@ export class Nurse{
     this.groupPriority = 0;
   }
 
+  // Assign role priority for type of nurse as a number
   assignRolePriority(){
     if(this.role === "CN"){
       this.rolePriority = 1;
@@ -28,22 +29,25 @@ export class Nurse{
     }
   }
 
-  // Remove function below when tests are complete!
+  // Remove function below when tests are complete! For testing purposes
   addVacationRequestTest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
     let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
     vacationRequest.getDateRange();
     this.vacationRequests.push(vacationRequest);
   }
 
+  // When add vacation requests, get the date range to save in vacation request and add to nurse
   addVacationRequest(vacationRequest){
     vacationRequest.getDateRange();
     this.vacationRequests.push(vacationRequest);
   }
 
+  // Add work request to nurse
   addWorkRequest(workRequest){
     this.workRequests.push(workRequest);
   }
 
+  // Check if range of dates in vacation request are the same as vacation dates in prior years and returns overlapping dates
   compareWithPriorVacations(vacReqDateRange, priorVacationDates){
     let overlapDates = [];
     for (let i = 0; i < vacReqDateRange.length; i++){
@@ -56,6 +60,7 @@ export class Nurse{
     return overlapDates;
   }
 
+  // Check if range of dates in vacation request are the same as holidays worked in prior years and returns overlapping dates
   compareWithPastHolidaysWorked(vacReqDateRange, daysWorked, holidays){
     let workedPastHolidayDates = [];
     let vacReqDate;
