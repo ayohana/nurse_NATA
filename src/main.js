@@ -114,21 +114,21 @@ $(document).ready(function(){
   $("#dueDate").attr('value', unit.requestDueDate.toISOString().substr(0,10));
   let workDates = 1;
 
-  let nurseG = new Nurse("G", "Gegege", new Date("2013/06/09"), 1356, [1/3], "CN", 0.6);
-  let nurseH = new Nurse("H", "Hihi", new Date("2011/08/15"), 2356, [1/2], "CN", 0.9);
-  let nurseI = new Nurse("I", "Eye", new Date("2003/02/14"), 5413, [], "CN", 0.3);
+  let nurseG = new Nurse("Mary", "Smith", new Date("2013/06/09"), 1356, [1/3], "CN", 0.6);
+  let nurseH = new Nurse("Patricia", "Johnson", new Date("2011/08/15"), 2356, [1/2], "CN", 0.9);
+  let nurseI = new Nurse("Linda", "Williams", new Date("2003/02/14"), 5413, [], "CN", 0.3);
  
-  let nurseJ = new Nurse("J", "Bird", new Date("2007/04/17"), 7439, [1/3], "RN", 0.6);
-  let nurseK = new Nurse("K", "Okokok", new Date("2002/08/08"), 4523, [1/2], "RN", 0.9);
-  let nurseL = new Nurse("L", "El", new Date("1998/07/11"), 1743, [], "RN", 0.3);
-  let nurseM = new Nurse("M", "Mmmmm", new Date("2014/02/19"), 8482, [], "RN", 0.9);
+  let nurseJ = new Nurse("Barbara", "Jones", new Date("2007/04/17"), 7439, [1/3], "RN", 0.6);
+  let nurseK = new Nurse("Elizabeth", "Brown", new Date("2002/08/08"), 4523, [1/2], "RN", 0.9);
+  let nurseL = new Nurse("Jennifer", "Davis", new Date("1998/07/11"), 1743, [], "RN", 0.3);
+  let nurseM = new Nurse("Maria", "Miller", new Date("2014/02/19"), 8482, [], "RN", 0.9);
 
-  let nurseA = new Nurse("A", "Last", new Date("2000/01/02"), 1234, [2/3, 4/5], "NAC", 0.6);
-  let nurseB = new Nurse("B", "Class", new Date("2011/02/08"), 3456, [1/3], "NAC", 0.6);
-  let nurseC = new Nurse("C", "Name", new Date("2005/12/21"), 2345, [1/2], "NAC", 0.9);
-  let nurseD = new Nurse("D", "Rank", new Date("2008/03/14"), 543, [], "NAC", 0.3);
-  let nurseE = new Nurse("E", "EEEE", new Date("2018/01/24"), 5432, [], "NAC", 0.9);
-  let nurseF = new Nurse("F", "FFFF", new Date("2002/05/03"), 1543, [], "NAC", 0.9);
+  let nurseA = new Nurse("Susan", "Thomas", new Date("2000/01/02"), 1234, [2/3, 4/5], "NAC", 0.6);
+  let nurseB = new Nurse("Lisa", "Lee", new Date("2011/02/08"), 3456, [1/3], "NAC", 0.6);
+  let nurseC = new Nurse("Nancy", "Wright", new Date("2005/12/21"), 2345, [1/2], "NAC", 0.9);
+  let nurseD = new Nurse("Betty", "Young", new Date("2008/03/14"), 543, [], "NAC", 0.3);
+  let nurseE = new Nurse("Carol", "Turner", new Date("2018/01/24"), 5432, [], "NAC", 0.9);
+  let nurseF = new Nurse("Laura", "Adams", new Date("2002/05/03"), 1543, [], "NAC", 0.9);
 
 
   addNurseToUnit(nurseA, unit);
