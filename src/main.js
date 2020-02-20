@@ -41,7 +41,7 @@ function addToPriorityOutput(nurseArray, outputLocation){
 }
 
 // Add all vacation requests into MVP output area dynamically
-function addVactionRequestOutput(nurseArray){
+function addVacationRequestOutput(nurseArray){
   for(let i=0; i<nurseArray.length; i++){
     let currentVacationRequests = nurseArray[i].vacationRequests;
     if(currentVacationRequests.length > 0){
@@ -265,7 +265,7 @@ $(document).ready(function(){
           $("#vacationOutput").empty();
           $("#allVacationOutput").show();
           $("#outputVacationMessage").hide();
-          addVactionRequestOutput(unit.nurses);
+          addVacationRequestOutput(unit.nurses);
           $("#vacationMessage").text("Vacation request succesfully submitted!");
         }
 
@@ -321,14 +321,14 @@ $(document).ready(function(){
   $("#vacationByName").click(function(event){
     event.preventDefault();
     $("#vacationOutput").empty();
-    addVactionRequestOutput(unit.nurses);
+    addVacationRequestOutput(unit.nurses);
   });
 
   // When click sort vacation by date, show All Vacation Request output sorted by start date
   $("#vacationByDate").click(function(event){
     event.preventDefault();
     $("#vacationOutput").empty();
-    addVactionRequestOutput(unit.sortVacationsByStartDate(unit.nurses));
+    addVacationRequestOutput(unit.sortVacationsByStartDate(unit.nurses));
   });
 
   // When click sort work by name, show All Work Request output sorted by last name

@@ -1,5 +1,4 @@
 import { PastSchedule } from "./past-schedule";
-import { VacationRequest } from "./vacation-request";
 
 export class Nurse{
   constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
