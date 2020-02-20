@@ -140,6 +140,15 @@ function showPastHolidaysWorked(nurse, unit) {
   }
 }
 
+function showStaffOverlapVacReqs(unit, sortedStaff){
+  let overlapVacReqs = unit.compareVacationRequests(sortedStaff);
+  if ($.isEmptyObject(overlapVacReqs)) {
+    console.log(`${sortedStaff[0].role}s in this Unit do not have any overlapping vacation requests.`);
+  } else {
+    console.log(`These ${sortedStaff[0].role}'s have overlapping vacation requests: ${Object.keys(overlapVacReqs)} on these dates: ${Object.values(overlapVacReqs)}`);
+  }
+}
+
 // User Interface LOGIC ----------------------------------------------------
 $(document).ready(function(){
   let unit = new Unit();
@@ -237,9 +246,12 @@ $(document).ready(function(){
   // console.log(unit.compareVacationRequests(unit.sortedChargeNurses));
   // console.log(unit);
   // console.log(nurseB.checkVacationRequest());
-  // // showPriorVacations(nurseA);
-  // showPastHolidaysWorked(nurseA, unit);
-  // // console.log(unit);
+  showPriorVacations(nurseA);
+  showPastHolidaysWorked(nurseA, unit);
+  showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
+  showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
+  // showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants); // glitchy, will fix
+  console.log(unit);
 
   // Change due date from default and display message that it changed
   $("#dueDateButton").click(function(event){
