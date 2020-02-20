@@ -2,12 +2,11 @@ import { PastSchedule } from "./past-schedule";
 import { VacationRequest } from "./vacation-request";
 
 export class Nurse{
-  constructor(firstName, lastName, hireDate, hoursWorked, priorDaysOff, role, fte){
+  constructor(firstName, lastName, hireDate, hoursWorked,  role, fte){
     this.firstName = firstName.toLowerCase();
     this.lastName = lastName.toLowerCase();
     this.hireDate = hireDate;
     this.hoursWorked = hoursWorked;
-    this.priorDaysOff = priorDaysOff;
     this.role = role;
     this.fte = fte;
     this.vacationRequests = [];
