@@ -130,12 +130,26 @@
       </div> <!--End of MVP Output-->
 
       <hr>
-      <div id="requestsPrioritized">
-        <h2>Prioritized Requests</h2>
+      <div id="conflictingRequests">
+        <h2>Prioritized Overlapping Requests</h2>
         <p>Vacation requests in priority order when requested dates overlap between nurses.</p>
-        <div id="prioritizedOutput">
+        <div id="conflictingOutput">
+          <h4>Charge Nurses:</h4>
+          <div id="conflictingCN">
 
+          </div>
+          <h4>Registered Nurses:</h4>
+          <div id="conflictingRN">
+
+          </div>
+          <h4>Nursing Assistants:</h4>
+          <div id="conflictingNAC">
+
+          </div>
+          
         </div> <!--End of Prioritized Overlapping Requests-->
+        <p><span id="conflictMessage"></span></p>
+        <button class="btn btn-primary" id="showConflicts">Refresh Overlapping Requests</button>
       </div>
     </div>
   </body>
