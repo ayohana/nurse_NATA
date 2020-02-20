@@ -85,9 +85,11 @@ There are currently no known bugs in this program.
 ## Improvement Areas:
 
 * Use Calendar API to show nurses vacations
-* UseAPI for harcoded holidays
+* Use API for hardcoded holidays
 * Upload spreadsheet for schedule
-* Pull data for nurses from excel sheet
+* Pull data for nurses from excel spreadsheet
+* Consider day shift vs night shift
+* Taking into account prime time holidays (christmas, new year, etc)
 
 
 

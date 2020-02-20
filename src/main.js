@@ -12,7 +12,7 @@ function addNurseToUnit(nurse, unit){
   unit.addNurse(nurse);
 }
 
-// Return Full Name in Uwpercase
+// Return Full Name in Uppercase
 function getFullName(array, position){
   return array[position].firstName.toUpperCase() + " " + array[position].lastName.toUpperCase();
 }
@@ -152,7 +152,7 @@ $(document).ready(function(){
   $("#allWorkOutput").hide();
   $("#outputWorkMessage").show();
 
-  // When put input in vacation start date field, check if end date is before start date and clear input if start date invalid
+  // When enter input in vacation start date field, check if end date is before start date and clear input if start date invalid
   document.getElementById("vacationStartDate").addEventListener("input", function(){
     let endDate = convertDateInput($("#workReturnDate").val());
     let startDate = convertDateInput($("#vacationStartDate").val());
@@ -162,7 +162,7 @@ $(document).ready(function(){
     }
   });
 
-  // When put input in work return date field, check if start date is after end date and clear input if end date invalid
+  // When enter input in work return date field, check if start date is after end date and clear input if end date invalid
   document.getElementById("workReturnDate").addEventListener("input", function(){
     let endDate = convertDateInput($("#workReturnDate").val());
     let startDate = convertDateInput($("#vacationStartDate").val());
