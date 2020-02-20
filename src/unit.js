@@ -94,6 +94,35 @@ export class Unit{
     roleArray.sort((a,b) => a.hireDate - b.hireDate);
   }
 
+  sortWorkByDate(nurseArray){
+    let workArray = [];
+    for (let i=0; i< nurseArray.length; i++){
+      if (nurseArray[i].workRequests.length > 0){
+        for (let j=0; j< nurseArray[i].workRequests.length; j++){
+          let request = {firstName: nurseArray[i].firstName, lastName: nurseArray[i].lastName, workRequests: [nurseArray[i].workRequests[j]]};
+          workArray.push(request);
+        }
+      }
+    }
+    workArray.sort((a,b) => a.workRequests[0].getTime() - b.workRequests[0].getTime());
+    return workArray;
+  }
+
+  sortVacationsByStartDate(nurseArray){
+    let vacationArray = [];
+    for (let i=0; i< nurseArray.length; i++){
+      if (nurseArray[i].vacationRequests.length > 0){
+        for (let j=0; j< nurseArray[i].vacationRequests.length; j++){
+          let request = {firstName: nurseArray[i].firstName, lastName: nurseArray[i].lastName, vacationRequests: [nurseArray[i].vacationRequests[j]]};
+          vacationArray.push(request);
+        }
+      }
+    }
+    vacationArray.sort((a,b) => a.vacationRequests[0].vacationStartDate - b.vacationRequests[0].vacationStartDate);
+    return vacationArray;
+    
+  }
+
   sortByLastName(nurseArray){
     nurseArray.sort(function(a,b){
       let c = a.lastName.toLowerCase();

@@ -237,7 +237,6 @@ $(document).ready(function(){
     let dates = document.getElementsByClassName("workDates");
     for (let i=0; i<dates.length; i++){
       let dateObj = convertDateInput(dates[i].value);
-      console.log(currentNurse.workRequests);
       if(dates[i].valueAsDate != null){
         if (currentNurse.workRequests.some(date => date.getTime() === dateObj.getTime())){
           $("#workMessage").append(`<p>Work request for ${dateObj.toDateString()} already exists!</p>`);
@@ -258,9 +257,22 @@ $(document).ready(function(){
     addVactionRequestOutput(unit.nurses);
   });
 
+  $("#vacationByDate").click(function(event){
+    event.preventDefault();
+    $("#vacationOutput").empty();
+    addVactionRequestOutput(unit.sortVacationsByStartDate(unit.nurses));
+  });
+
   $("#workByName").click(function(event){
     event.preventDefault();
     $("#workOutput").empty();
     addWorkRequestOutput(unit.nurses);
+  });
+
+  $("#workByDate").click(function(event){
+    event.preventDefault();
+    $("#workOutput").empty();
+    let sorted = unit.sortWorkByDate(unit.nurses);
+    addWorkRequestOutput(sorted);
   });
 });
