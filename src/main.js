@@ -86,14 +86,6 @@ function convertDateInput(input){
   return new Date(input.replace(/-/g, '/'));
 }
 
-function checkEnd(){
-  let endDate = convertDateInput($("#workReturnDate").val());
-  let startDate = convertDateInput($("#vacationStartDate").val());
-  if (endDate != "" && endDate < startDate){
-    alert("Start date must be before end date.");
-  }
-}
-
 $(document).ready(function(){
   let unit = new Unit();
   $("#allVacationOutput").hide();
@@ -106,8 +98,7 @@ $(document).ready(function(){
     let startDate = convertDateInput($("#vacationStartDate").val());
     if (endDate != "" && endDate < startDate){
       alert("Start date must be before end date.");
-      // $("#vacationStartDate").attr('value',endDate.toISOString().substr(0,10));
-      //Doesn't work, need to change date or disable from submitting
+      $("#vacationStartDate").val("endDate.toISOString().substr(0,10)");
     }
   });
   document.getElementById("workReturnDate").addEventListener("input", function(){
@@ -115,8 +106,7 @@ $(document).ready(function(){
     let startDate = convertDateInput($("#vacationStartDate").val());
     if (startDate != "" && endDate < startDate){
       alert("Start date must be before end date.");
-      // $("#workReturnDate").attr('value',startDate.toISOString().substr(0,10));
-      //Doesn't work, need to change date or disable from submitting
+      $("#workReturnDate").val("startDate.toISOString().substr(0,10)");
     }
   });
 
