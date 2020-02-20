@@ -235,7 +235,7 @@ $(document).ready(function(){
   showPastHolidaysWorked(nurseA, unit);
   showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
   showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
-  showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
+  // showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants); // glitchy, will fix
   console.log(unit);
 
   $("#dueDateButton").click(function(event){
