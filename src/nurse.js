@@ -55,9 +55,9 @@ export class Nurse{
 
     //check for empty arrays - if empty, return no overlapping dates for instance
     this.vacationRequests[0].getDateRange();
-    console.log("overlap"+this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates[0]));
+    this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates[0]);
     // this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
-    console.log(this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked[0], holidays));
+    this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked[0], holidays);
     // this.compareWithPastHolidaysWorked(this.pastSchedule2018.daysWorked, holidays);
     // this.compareWithOtherVacationRequests(nursesRole);
   }
@@ -74,28 +74,6 @@ export class Nurse{
     }
     return overlapDates;
   }
-
-  // 2 Analyze 2 years past schedule to see their past holidays worked (same priority with #2)
-
-  // 
-  // compareWithPastHolidaysWorked(daysWorked, holidays){
-  //   let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
-  //   let workedPastHolidayDates = [];
-  //   for (let i=0; i < vacationRequest.length; i++){
-  //     for (let j=0; j < holidays.length; j++) {
-  //       if (vacationRequest[i].getTime() === holidays[j].getTime() ){
-  //         for (let k=0; k < daysWorked.length; k++){
-  //           if ((vacationRequest[i].getMonth() != daysWorked[k].getMonth() && vacationRequest[i].getDate() != daysWorked[k].getDate()) || (vacationRequest[i].getMonth() === daysWorked[k].getMonth() && vacationRequest[i].getDate() != daysWorked[k].getDate())){  
-  //             continue;
-  //           } else {
-  //             workedPastHolidayDates.push("Worked holidays: " + daysWorked[k]);
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return workedPastHolidayDates;
-  // }
 
   compareWithPastHolidaysWorked(daysWorked, holidays){
     let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
@@ -120,20 +98,7 @@ export class Nurse{
 
   // Returns approval/rejection with the dates
 
-  compareWithOtherVacationRequests(nursesRole){
-
-    let vacationRequest = this.vacationRequest[0].vacationReqDateRange
   
-    for (let i=0; i < vacationRequest.length; i++){
-      for (let j=0; j < nursesRole.length; j++) {
-        for (let k=0; k < nursesRole[j].vacationRequests.length; k++){
-          if (vacationRequest[i].getTime() === nursesRole[j].vacationRequests[k].getTime()){
-            return console.log(`Day ${vacationRequest[i]} overlapped with other nurse request`);
-          }
-        }
-      }
-    }
-  }
   
 }
 
