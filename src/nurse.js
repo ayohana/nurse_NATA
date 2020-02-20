@@ -55,8 +55,7 @@ export class Nurse{
   //   // this.compareWithOtherVacationRequests(nursesRole);
   // }
 
-  compareWithPriorVacations(priorVacationDates){
-    let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
+  compareWithPriorVacations(vacationRequest, priorVacationDates){
     let overlapDates = [];
     for (let i=0; i < vacationRequest.length; i++){
       for (let j=0; j < priorVacationDates.length; j++) {

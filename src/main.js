@@ -88,23 +88,33 @@ function convertDateInput(input){
 
 function showPriorVacations(nurse) {
   let workedPastVacDates;
-  for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
-    workedPastVacDates = nurse.compareWithPriorVacations(nurse.pastSchedule2019.priorVacationDates[i]);
-    if (workedPastVacDates.length === 0) {
-      console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2019 compared to the dates requested this year.`)
-    } else {
-      console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2019 compared to this year: ${workedPastVacDates}`)
+  for (let m = 0; m < nurse.vacationRequests.length; m++) {
+    for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
+      workedPastVacDates = nurse.compareWithPriorVacations(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2019.priorVacationDates[i]);
+      if (workedPastVacDates.length === 0) {
+        console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2019 compared to the dates requested this year.`)
+      } else {
+        console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2019 compared to this year: ${workedPastVacDates}`)
+      }
     }
   }
-  for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
-    workedPastVacDates = nurse.compareWithPriorVacations(nurse.pastSchedule2018.priorVacationDates[i]);
-    if (workedPastVacDates.length === 0) {
-      console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2018 compared to the dates requested this year.`)
-    } else {
-      console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2018 compared to this year: ${workedPastVacDates}`)
+  for (let m = 0; m < nurse.vacationRequests.length; m++) {
+    for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
+      workedPastVacDates = nurse.compareWithPriorVacations(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2018.priorVacationDates[i]);
+      if (workedPastVacDates.length === 0) {
+        console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2018 compared to the dates requested this year.`)
+      } else {
+        console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2018 compared to this year: ${workedPastVacDates}`)
+      }
     }
   }
 }
+
+// function showPastHolidaysWorked(nurse) {
+//   let workedPastHolidays;
+  
+//   workedPastHolidays = nurse.vacationRequests[i].vacationReqDateRange
+// }
 
 $(document).ready(function(){
   let unit = new Unit();
@@ -178,6 +188,7 @@ $(document).ready(function(){
   nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
   nurseA.pastSchedule2019.savePriorVacationDates([]);
   nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03")]);
+  nurseB.pastSchedule2018.savePriorVacationDates([new Date("2018/06/29"), new Date("2018/06/30"), new Date("2018/07/01"), new Date("2018/07/02"), new Date("2018/07/03")]);
   nurseC.pastSchedule2019.savePriorVacationDates([]);
 
   nurseA.addVacationRequestTest("A", "Last", new Date("2020/01/17"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
