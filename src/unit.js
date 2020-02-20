@@ -87,7 +87,7 @@ export class Unit{
   }
 
   sortByHours(roleArray){
-    roleArray.sort((a,b) => parseFloat(a.hoursWorked) - parseFloat(b.hoursWorked));
+    roleArray.sort((a,b) => parseFloat(b.hoursWorked) - parseFloat(a.hoursWorked));
   }
 
   sortByHireDate(roleArray){
