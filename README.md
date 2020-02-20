@@ -95,9 +95,14 @@ There are currently no known bugs in this program.
 
 ## Work Distribution
  * Adela
+    * Project Manager
+    * Full-Stack
  * Andriy
+    * Full-Stack
  * Neha 
+    * Full-Stack
  * Tiffany
+    * Lead Full-Stack
 
 
 ## Support and contact details
