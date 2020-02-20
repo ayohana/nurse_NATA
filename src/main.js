@@ -119,6 +119,8 @@ function showPriorVacations(nurse) {
 // Check if Nurse worked on the holidays in the past 2 years
 function showPastHolidaysWorked(nurse, unit) {
   let workedPastHolidays;
+  let message = "";
+  console.log(nurse + unit)
   for (let m = 0; m < nurse.vacationRequests.length; m++) {
     for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
       workedPastHolidays = nurse.compareWithPastHolidaysWorked(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2019.daysWorked, unit.holidays2019);
@@ -133,12 +135,14 @@ function showPastHolidaysWorked(nurse, unit) {
     for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
       workedPastHolidays = nurse.compareWithPastHolidaysWorked(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2018.daysWorked, unit.holidays2018);
       if (workedPastHolidays.length === 0) {
-        console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2018.`);
+        message += `${nurse.firstName} ${nurse.lastName} did not work any holidays in 2018.`;
       } else {
-        console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2018: ${workedPastHolidays}.`);
+        message += `${nurse.firstName} ${nurse.lastName} worked on these holidays in 2018: ${workedPastHolidays}.`;
       }
     }
   }
+  console.log(message);
+  return message;
 }
 
 // Show message for if there are overlapping vacation request dates within group of a nurse type
@@ -224,11 +228,13 @@ $(document).ready(function(){
   addToPriorityOutput(unit.sortedRegisteredNurses, "RNpriority");
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
-  showPriorVacations(nurseA);
-  showPastHolidaysWorked(nurseA, unit);
-  showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
-  showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
-  showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
+  nurseA.pastSchedule2019.savePastSchedule([new Date("2019/02/18"), new Date("2019/02/19"), new Date("2019/02/20"), new Date("2019/02/21"), new Date("2019/02/22"), new Date("2019/02/23"), new Date("2019/02/24"), new Date("2019/02/25"), new Date("2019/02/26"), new Date("2019/02/27"), new Date("2019/02/28")]);
+  nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/3"), new Date("2019/7/4"), new Date("2019/07/5"), new Date("2019/07/6"), new Date("2019/07/7")]);
+  nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
+
+  // showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
+  // showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
+  // showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
 
   // Change due date from default and display message that it changed
   $("#dueDateButton").click(function(event){
@@ -267,6 +273,9 @@ $(document).ready(function(){
           $("#outputVacationMessage").hide();
           addVacationRequestOutput(unit.nurses);
           $("#vacationMessage").text("Vacation request succesfully submitted!");
+          console.log(unit.currentNurse);
+          console.log(showPastHolidaysWorked(unit.currentNurse, unit))
+          $("#holidayMessage").text(showPastHolidaysWorked(currentNurse, unit));
         }
 
       } else {
