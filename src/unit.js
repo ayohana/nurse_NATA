@@ -1,5 +1,3 @@
-//import {Nurse} from './nurse';
-
 export class Unit{
   constructor(){
     this.nurses = [];
@@ -49,7 +47,6 @@ export class Unit{
     } else {
       roleNumber = array[0].rolePriority;
     }
-    
     for (let i=0; i<array.length; i++){
       if(array[i].fte === 0.9){
         fullTime.push(array[i]);
@@ -120,7 +117,6 @@ export class Unit{
     }
     vacationArray.sort((a,b) => a.vacationRequests[0].vacationStartDate - b.vacationRequests[0].vacationStartDate);
     return vacationArray;
-    
   }
 
   sortByLastName(nurseArray){
@@ -138,26 +134,25 @@ export class Unit{
   }
 
   compareVacationRequests(sortedStaff){
-    let overlapVacationRequests = [];
+    let overlapVacationRequests = {};
+    let staffNames;
     let staffIndex = 0;
-  
-    for (let j=0; j < sortedStaff.length; j++){
+    for (let j = 0; j < sortedStaff.length; j++){
       if (staffIndex >= sortedStaff.length - 1) {
         staffIndex = 0;
       } else {
         staffIndex += 1;
       }
-
-      for (let i=0; i < sortedStaff[j].vacationRequests.length; i++) {
-        let rangeWithTime = [];
-        sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
-
-        for (let k=0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
-
-          if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
-            overlapVacationRequests.push(sortedStaff[j].firstName + " and " + sortedStaff[staffIndex].firstName + " have overlapping request days: " + sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k]);
-          } 
-
+      for (let i = 0; i < sortedStaff[j].vacationRequests.length; i++) {
+        if (sortedStaff[j].vacationRequests.length != 0) {
+          let rangeWithTime = [];
+          sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
+          for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
+            if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
+              staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
+              overlapVacationRequests[staffNames] += `${sortedStaff[j].vacationRequests[i].vacationReqDateRange[k]} `;
+            } 
+          }
         }
       }
     }

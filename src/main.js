@@ -6,7 +6,6 @@ import { VacationRequest } from '../src/vacation-request';
 import { Nurse } from './nurse';
 import { Unit } from './unit';
 
-
 function addNurseToUnit(nurse, unit){
   nurse.assignRolePriority();
   unit.addNurse(nurse);
@@ -134,6 +133,15 @@ function showPastHolidaysWorked(nurse, unit) {
   }
 }
 
+function showStaffOverlapVacReqs(unit, sortedStaff){
+  let overlapVacReqs = unit.compareVacationRequests(sortedStaff);
+  if ($.isEmptyObject(overlapVacReqs)) {
+    console.log(`${sortedStaff[0].role}s in this Unit do not have any overlapping vacation requests.`);
+  } else {
+    console.log(`These ${sortedStaff[0].role}'s have overlapping vacation requests: ${Object.keys(overlapVacReqs)} on these dates: ${Object.values(overlapVacReqs)}`);
+  }
+}
+
 $(document).ready(function(){
   let unit = new Unit();
   $("#allVacationOutput").hide();
@@ -225,7 +233,10 @@ $(document).ready(function(){
   // console.log(nurseB.checkVacationRequest());
   showPriorVacations(nurseA);
   showPastHolidaysWorked(nurseA, unit);
-  // console.log(unit);
+  showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
+  showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
+  showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
+  console.log(unit);
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();
