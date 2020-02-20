@@ -29,13 +29,6 @@ export class Nurse{
     }
   }
 
-  // Remove function below when tests are complete! For testing purposes
-  addVacationRequestTest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments){
-    let vacationRequest = new VacationRequest(firstName, lastName, submissionDate, vacationStartDate, workReturnDate, workDaysRequestedOff, vacationHoursAvailable, comments);
-    vacationRequest.getDateRange();
-    this.vacationRequests.push(vacationRequest);
-  }
-
   // When add vacation requests, get the date range to save in vacation request and add to nurse
   addVacationRequest(vacationRequest){
     vacationRequest.getDateRange();

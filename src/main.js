@@ -222,36 +222,11 @@ $(document).ready(function(){
   addToPriorityOutput(unit.sortedRegisteredNurses, "RNpriority");
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
-  // HARD-CODED TEST NURSE SCHEDULES
-  nurseA.pastSchedule2019.savePastSchedule([new Date("2019/06/01"), new Date("2019/06/02"), new Date("2019/06/04"), new Date("2019/07/03"), new Date("2019/07/04"), new Date("2019/07/05")]);
-  nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/4"), new Date("2019/7/21"), new Date("2019/07/22"), new Date("2019/07/23"), new Date("2019/07/24")]);
-  nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
-  nurseA.pastSchedule2019.savePriorVacationDates([]);
-  nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03"), new Date("2019/07/04")]);
-  nurseB.pastSchedule2018.savePriorVacationDates([new Date("2018/06/29"), new Date("2018/06/30"), new Date("2018/07/01"), new Date("2018/07/02"), new Date("2018/07/03")]);
-  nurseC.pastSchedule2019.savePriorVacationDates([]);
-
-  // HARD-CODED TEST NURSE PRE-ADDED VACATION REQUESTS
-  nurseA.addVacationRequestTest("A", "Last", new Date("2020/01/17"), new Date("2020/07/03"), new Date("2020/07/06"), 3, 100, "test1");
-  nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/06/30"), new Date("2020/07/02"), 3, 100, "test1");
-  nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/07/04"), new Date("2020/07/06"), 3, 100, "test1");
-  nurseC.addVacationRequestTest("C", "Name", new Date("2020/01/20"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
-
-  nurseG.addVacationRequestTest("G", "Gegege", new Date("2020/01/17"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
-  nurseH.addVacationRequestTest("H", "Hihi", new Date("2020/01/15"), new Date("2020/06/30"), new Date("2020/07/05"), 3, 100, "test1");
-  nurseI.addVacationRequestTest("I", "Eye", new Date("2020/01/15"), new Date("2020/07/01"), new Date("2020/07/06"), 3, 100, "test1");
- 
-  // nurseB.analyzeVacationRequest(unit.holidays2020);
-  // console.log(unit.sortedChargeNurses);
-  // console.log(unit.compareVacationRequests(unit.sortedChargeNurses));
-  // console.log(unit);
-  // console.log(nurseB.checkVacationRequest());
   showPriorVacations(nurseA);
   showPastHolidaysWorked(nurseA, unit);
   showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
   showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
-  // showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants); // glitchy, will fix
-  console.log(unit);
+  showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
 
   // Change due date from default and display message that it changed
   $("#dueDateButton").click(function(event){
