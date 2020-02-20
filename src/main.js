@@ -86,6 +86,26 @@ function convertDateInput(input){
   return new Date(input.replace(/-/g, '/'));
 }
 
+function showPriorVacations(nurse) {
+  let workedPastVacDates;
+  for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
+    workedPastVacDates = nurse.compareWithPriorVacations(nurse.pastSchedule2019.priorVacationDates[i]);
+    if (workedPastVacDates.length === 0) {
+      console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2019 compared to the dates requested this year.`)
+    } else {
+      console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2019 compared to this year: ${workedPastVacDates}`)
+    }
+  }
+  for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
+    workedPastVacDates = nurse.compareWithPriorVacations(nurse.pastSchedule2018.priorVacationDates[i]);
+    if (workedPastVacDates.length === 0) {
+      console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2018 compared to the dates requested this year.`)
+    } else {
+      console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2018 compared to this year: ${workedPastVacDates}`)
+    }
+  }
+}
+
 $(document).ready(function(){
   let unit = new Unit();
   $("#allVacationOutput").hide();
@@ -173,7 +193,8 @@ $(document).ready(function(){
   // console.log(unit.sortedChargeNurses);
   // console.log(unit.compareVacationRequests(unit.sortedChargeNurses));
   // console.log(unit);
-  console.log(nurseB.checkVacationRequest());
+  // console.log(nurseB.checkVacationRequest());
+  showPriorVacations(nurseB);
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();

@@ -44,52 +44,27 @@ export class Nurse{
     this.workRequests.push(workRequest);
   }
 
-  analyzeVacationRequest(holidays){
+  // analyzeVacationRequest(holidays){
 
-    //check for empty arrays - if empty, return no overlapping dates for instance
-    this.vacationRequests[0].getDateRange();
-    this.compareWithPriorVacations();
-    // this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
-    this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked[0], holidays);
-    // this.compareWithPastHolidaysWorked(this.pastSchedule2018.daysWorked, holidays);
-    // this.compareWithOtherVacationRequests(nursesRole);
-  }
+  //   //check for empty arrays - if empty, return no overlapping dates for instance
+  //   this.vacationRequests[0].getDateRange();
+  //   this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates[0]);
+  //   // this.compareWithPriorVacations(this.pastSchedule2018.priorVacationDates);
+  //   this.compareWithPastHolidaysWorked(this.pastSchedule2019.daysWorked[0], holidays);
+  //   // this.compareWithPastHolidaysWorked(this.pastSchedule2018.daysWorked, holidays);
+  //   // this.compareWithOtherVacationRequests(nursesRole);
+  // }
 
-  checkVacationRequest(){
-    let overlapVacationDates = this.compareWithPriorVacations(this.pastSchedule2019.priorVacationDates)
-    if (overlapVacationDates.length === 0) {
-      return `${this.firstName} ${this.lastName} do not have current vacation request dates overlapping with prior vacation dates.`
-    } else {
-      return overlapVacationDates;
-    }
-    
-  }
-
-  compareWithPriorVacations(){
+  compareWithPriorVacations(priorVacationDates){
+    let vacationRequest = this.vacationRequests[0].vacationReqDateRange;
     let overlapDates = [];
-    let vacReqArr = this.vacationRequests;
-    let priorVacArr = this.pastSchedule2019.priorVacationDates;
-    console.log(vacReqArr);
-    console.log(priorVacArr);
-
-    for (let k = 0; k < vacReqArr.length; k++){
-      for (let i = 0; i < vacReqArr[k].vacationReqDateRange.length; i++){
-        console.log(vacReqArr[k].vacationReqDateRange[i]);
-        console.log(vacReqArr[k].vacationReqDateRange[i].getDate() === priorVacArr[i].getDate());
+    for (let i=0; i < vacationRequest.length; i++){
+      for (let j=0; j < priorVacationDates.length; j++) {
+        if (vacationRequest[i].getDate() === priorVacationDates[j].getDate() && vacationRequest[i].getMonth() === priorVacationDates[j].getMonth()){
+          overlapDates.push(priorVacationDates[j]);
+        }
       }
     }
-
-    // for (let i=0; i < vacReqDateRange.length; i++){
-
-    
-    //   for (let j=0; j < priorVacationDates.length; j++) {
-    //     if (vacReqDateRange[i].getDate() === priorVacationDates[j].getDate() && vacReqDateRange[i].getMonth() === priorVacationDates[j].getMonth()){
-    //       overlapDates.push(priorVacationDates[j]);
-    //     }
-    //   }
-    // }
-
-    console.log(overlapDates);
     return overlapDates;
   }
 
@@ -109,6 +84,5 @@ export class Nurse{
     }
     return workedPastHolidayDates;
   }
-  
-}
 
+}
