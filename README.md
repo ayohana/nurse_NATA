@@ -1,4 +1,4 @@
-# [NursSync](https://github.com/ayohana/nurse_NATA.git/)
+# [NurScheduler](https://github.com/ayohana/nurse_NATA.git/)
 
 #### Team Week Javascript Project for Epicodus, 02.17.2020
 
@@ -11,7 +11,7 @@ This application also allows nurse scheduler to add work requests made by nurses
 It sorts the vacation requests by name or by job start date.<br>
 Priority is given to nurses in the following order:**
 
-* FTE level (full-time, part-time, and per diem)
+* FTE level (full-time, part-time and per diem)
   * Per diem nurses are more able to have less working days so they have a higher priority for getting vacation days.
 * Seniority level
   * Charge Nurses and Registered Nurses have seniority by the number of cumulative hours worked.  Nursing Assistants have seniority by their hire date.
@@ -30,7 +30,7 @@ Note: This application does **not** make decisions on which nurse gets the dates
   * Use the command `npm run start` to start the web application.
 * Start submitting requests.                                                                                        
 
-### Requirements to Run
+## Requirements to Run
 * _Web Browser_
 * _Webpack_
 * _Node.js_
@@ -68,9 +68,9 @@ Note: This application does **not** make decisions on which nurse gets the dates
 |Reject vacation request if submitted date is after due date for requests|Subbmission Due Date:  02/20/2020 <br> User Submission Date: 03/20/2020| "Vacation request is past the submission due date"|
 |Gather input for work requests from nurses| Susan Lee : 02/23/2020, 03/14/2020 <br> Carol Tuner: 03/21/2020| Susan Lee 02/23/2020 <br> Susan Lee 03/14/2020 <br> Carol Turner 03/21/2020
 |Sort the list by last name| Jennifer Davis <br> Lisa Lee <br> Laura Adams| Laura Adams <br> Jennifer Davis <br> Lisa Lee
-|Priotrize nurses by FTE level|Susan Thomas 0.6 <br> Laura Adams per diem <br> Nancy Wright 0.9|Laura Adams <br> Susan Thomas <br> Nancy Wright
-|Priotrize nurses by hours worked|Jennifer Davis: 1743 hrs <br> Barbaar Jones: 7439 hrs <br> Maria Miller: 8482 hrs| Maria Miller <br> Barbara Jones <br> Jennifer Davis
-|The application will give priority list for overlapping vacaton requests dates| Elizabeth Brown = 2/4-2/6 'priority = 3' <br> Jennifer Davis = 2/5-2/7 'priority =2' <br> Maria Miller = 2/6-2/8 'priority = 1'|Maria Miller <br> Jennifer Davis <br> Elizabeth Brown
+|Prioritize nurses by FTE level|Susan Thomas 0.6 <br> Laura Adams per diem <br> Nancy Wright 0.9|Laura Adams <br> Susan Thomas <br> Nancy Wright
+|Prioritize nurses by hours worked|Jennifer Davis: 1743 hrs <br> Barbaar Jones: 7439 hrs <br> Maria Miller: 8482 hrs| Maria Miller <br> Barbara Jones <br> Jennifer Davis
+|The application shows overlapping vacation requests dates| Elizabeth Brown = 2/4-2/6 <br> Jennifer Davis = 2/5-2/7  |Elizabeth Brown and Jennifer Davis have overlapping vacation request dates  as follows 2/5-2/6
 
 ## Screenshots
 
@@ -78,20 +78,27 @@ _Here is a snippet of what the input looks like:_
 
 ![image of info to be entered](src/img1.png)
 
-_Here is a preview of what the output looks like:_
-
-![image after submitting](img/snippet2.png) -->
-
-<!-- _{Show pictures using ![alt text](image.jpg), show what library does as concisely as possible but don't need to explain how project solves problem from `code`_ -->
-
-
 ## Known Bugs
 
 There are currently no known bugs in this program.
 
-## Support and contact details
+## Improvement Areas:
 
-If there are any question or concerns please contact us at our emails:
+* Use Calendar API to show nurses vacations
+* UseAPI for harcoded holidays
+* Upload spreadsheet for schedule
+* Pull data for nurses from excel sheet
+
+
+
+## Work Distribution
+ * Adela
+ * Andriy
+ * Neha 
+ * Tiffany
+
+
+## Support and contact details
 
 * [Adela Darmansyah](mailto:adela.yohana@gmail.com)
 * [Tiffany Siu](mailto:tsiu88@gmail.com)
