@@ -98,7 +98,7 @@ $(document).ready(function(){
     let startDate = convertDateInput($("#vacationStartDate").val());
     if (endDate != "" && endDate < startDate){
       alert("Start date must be before end date.");
-      $("#vacationStartDate").val("endDate.toISOString().substr(0,10)");
+      $("#vacationStartDate").val("");
     }
   });
   document.getElementById("workReturnDate").addEventListener("input", function(){
@@ -106,7 +106,7 @@ $(document).ready(function(){
     let startDate = convertDateInput($("#vacationStartDate").val());
     if (startDate != "" && endDate < startDate){
       alert("Start date must be before end date.");
-      $("#workReturnDate").val("startDate.toISOString().substr(0,10)");
+      $("#workReturnDate").val("");
     }
   });
 
@@ -199,12 +199,17 @@ $(document).ready(function(){
     vacationRequest.checkVacationHoursAvailable();
     let currentNurse = unit.searchNurse(firstName, lastName);
     if (vacationRequest.checkVacationRequest(unit.requestDueDate)){
-      currentNurse.addVacationRequest(vacationRequest);
-      $("#vacationOutput").empty();
-      $("#allVacationOutput").show();
-      $("#outputVacationMessage").hide();
-      addVactionRequestOutput(unit.nurses);
-      $("#vacationMessage").text("Vacation request succesfully submitted!");
+      if (currentNurse.vacationRequests.some(request => request.vacationStartDate.getTime() === vacationRequest.vacationStartDate.getTime()) && currentNurse.vacationRequests.some(request => request.workReturnDate.getTime() === vacationRequest.workReturnDate.getTime())){
+        $("#vacationMessage").text("Vacation request already exists!");
+      } else {
+        currentNurse.addVacationRequest(vacationRequest);
+        $("#vacationOutput").empty();
+        $("#allVacationOutput").show();
+        $("#outputVacationMessage").hide();
+        addVactionRequestOutput(unit.nurses);
+        $("#vacationMessage").text("Vacation request succesfully submitted!");
+      }
+      
     } else {
       $("#vacationMessage").text(`Vacation request is past the submission due date: ${unit.requestDueDate.toDateString()}.`);
     }
