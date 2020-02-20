@@ -136,12 +136,12 @@ function showPastHolidaysWorked(nurse, unit) {
 
 // Show message for if there are overlapping vacation request dates within group of a nurse type
 function showStaffOverlapVacReqs(unit, sortedStaff){
-  let overlapVacReqs = unit.compareVacationRequests(sortedStaff);
-  if ($.isEmptyObject(overlapVacReqs)) {
-    console.log(`${sortedStaff[0].role}s in this Unit do not have any overlapping vacation requests.`);
-  } else {
-    console.log(`These ${sortedStaff[0].role}'s have overlapping vacation requests: ${Object.keys(overlapVacReqs)} on these dates: ${Object.values(overlapVacReqs)}`);
-  }
+  return unit.compareVacationRequests(sortedStaff);
+  // if ($.isEmptyObject(overlapVacReqs)) {
+  //   console.log(`${sortedStaff[0].role}s in this Unit do not have any overlapping vacation requests.`);
+  // } else {
+  //   console.log(`These ${sortedStaff[0].role}'s have overlapping vacation requests: ${Object.keys(overlapVacReqs)} on these dates: ${Object.values(overlapVacReqs)}`);
+  // }
 }
 
 // User Interface LOGIC ----------------------------------------------------
@@ -151,6 +151,8 @@ $(document).ready(function(){
   $("#outputVacationMessage").show();
   $("#allWorkOutput").hide();
   $("#outputWorkMessage").show();
+  $("#conflictingOutput").hide();
+  $("#conflictingRequests").hide();
 
   // When put input in vacation start date field, check if end date is before start date and clear input if start date invalid
   document.getElementById("vacationStartDate").addEventListener("input", function(){
@@ -178,21 +180,21 @@ $(document).ready(function(){
   let workDates = 1;
 
   // HARD-CODED TEST NURSE INFO
-  let nurseG = new Nurse("mary", "smith", new Date("2013/06/09"), 1356, [1/3], "CN", 0.6);
-  let nurseH = new Nurse("patricia", "johnson", new Date("2011/08/15"), 2356, [1/2], "CN", 0.9);
-  let nurseI = new Nurse("linda", "williams", new Date("2003/02/14"), 5413, [], "CN", 0.3);
+  let nurseG = new Nurse("mary", "smith", new Date("2013/06/09"), 1356, "CN", 0.6);
+  let nurseH = new Nurse("patricia", "johnson", new Date("2011/08/15"), 2356, "CN", 0.9);
+  let nurseI = new Nurse("linda", "williams", new Date("2003/02/14"), 5413, "CN", 0.3);
  
-  let nurseJ = new Nurse("barbara", "jones", new Date("2007/04/17"), 7439, [1/3], "RN", 0.6);
-  let nurseK = new Nurse("elizabeth", "brown", new Date("2002/08/08"), 4523, [1/2], "RN", 0.9);
-  let nurseL = new Nurse("jennifer", "davis", new Date("1998/07/11"), 1743, [], "RN", 0.3);
-  let nurseM = new Nurse("maria", "miller", new Date("2014/02/19"), 8482, [], "RN", 0.9);
+  let nurseJ = new Nurse("barbara", "jones", new Date("2007/04/17"), 7439, "RN", 0.6);
+  let nurseK = new Nurse("elizabeth", "brown", new Date("2002/08/08"), 4523, "RN", 0.9);
+  let nurseL = new Nurse("jennifer", "davis", new Date("1998/07/11"), 1743,"RN", 0.3);
+  let nurseM = new Nurse("maria", "miller", new Date("2014/02/19"), 8482, "RN", 0.9);
 
-  let nurseA = new Nurse("susan", "thomas", new Date("2000/01/02"), 1234, [2/3, 4/5], "NAC", 0.6);
-  let nurseB = new Nurse("lisa", "lee", new Date("2011/02/08"), 3456, [1/3], "NAC", 0.6);
-  let nurseC = new Nurse("nancy", "wright", new Date("2005/12/21"), 2345, [1/2], "NAC", 0.9);
-  let nurseD = new Nurse("betty", "young", new Date("2008/03/14"), 543, [], "NAC", 0.3);
-  let nurseE = new Nurse("carol", "turner", new Date("2018/01/24"), 5432, [], "NAC", 0.9);
-  let nurseF = new Nurse("laura", "adams", new Date("2002/05/03"), 1543, [], "NAC", 0.9);
+  let nurseA = new Nurse("susan", "thomas", new Date("2000/01/02"), 1234, "NAC", 0.6);
+  let nurseB = new Nurse("lisa", "lee", new Date("2011/02/08"), 3456, "NAC", 0.6);
+  let nurseC = new Nurse("nancy", "wright", new Date("2005/12/21"), 2345, "NAC", 0.9);
+  let nurseD = new Nurse("betty", "young", new Date("2008/03/14"), 543, "NAC", 0.3);
+  let nurseE = new Nurse("carol", "turner", new Date("2018/01/24"), 5432, "NAC", 0.9);
+  let nurseF = new Nurse("laura", "adams", new Date("2002/05/03"), 1543, "NAC", 0.9);
 
   // Add nurses to units, sort, and output to MVP Output Priority list
   addNurseToUnit(nurseA, unit);
@@ -239,7 +241,7 @@ $(document).ready(function(){
   });
 
   // When submit vacation form, take in inputs
-  // Check if submitted before due date, have enough hours, and no duplicate requests with the same start and end dates for same nurse
+  // Check if submitted before due date, have enough hours, not the same dates as previous years, and no duplicate requests with the same start and end dates for same nurse
   // Add vacation request to nurse and add to MVP All vacation request output area
   $("form#vacationForm").submit(function(event){
     event.preventDefault();
@@ -265,7 +267,7 @@ $(document).ready(function(){
         if (pastOverlapVacations.length > 0){
           $("#priorVacationMessage").append(`<p>Similar vacation dates in last two years: </p>`);
           for (let i=0; i< pastOverlapVacations.length; i++){
-            $("#priorVacationMessage").append(`<p>${pastOverlapVacations[i].toDateString()}</p>`)
+            $("#priorVacationMessage").append(`<p>${pastOverlapVacations[i].toDateString()}</p>`);
           }
         } else {
           $("#priorVacationMessage").text(`No similar vacation dates found in the last two years.`);
@@ -357,5 +359,40 @@ $(document).ready(function(){
     $("#workOutput").empty();
     let sorted = unit.sortWorkByDate(unit.nurses);
     addWorkRequestOutput(sorted);
+  });
+
+  $("#showConflicts").click(function(event){
+    event.preventDefault();
+    $("#conflictingOutput").show();
+    $("#conflictingCN").text("");
+    $("#conflictingRN").text("");
+    $("#conflictingNAC").text("");
+    let CNOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
+    let RNOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
+    let NACOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
+    if ($.isEmptyObject(CNOverlapObj)) {
+      $("#conflictingCN").text("No overlapping vacation requests for CNs.");
+    } else{
+      for (let i=0; i< CNOverlapObj.length; i++){
+        $("#conflictingCN").append(`<li>${Object.keys(CNOverlapObj)[i]} overlap on dates ${Object.values(CNOverlapObj)[i]}</li>`);
+      }
+    }
+
+    if($.isEmptyObject(RNOverlapObj)){
+      $("#conflictingRN").text("No overlapping vacation requests for RNs.");
+    } else {
+      for (let i=0; i< RNOverlapObj.length; i++){
+        $("#conflictingRN").append(`<li>${Object.keys(RNOverlapObj)[i]} overlap on dates ${Object.values(RNOverlapObj)[i]}</li>`);
+      }
+    }
+
+    if($.isEmptyObject(NACOverlapObj)){
+      $("#conflictingNAC").text("No overlapping vacation requests for NACs.");
+    } else{
+      for (let i=0; i< NACOverlapObj.length; i++){
+        $("#conflictingNAC").append(`<li>${Object.keys(NACOverlapObj)[i]} overlap on dates ${Object.values(NACOverlapObj)[i]}</li>`);
+      }
+    }
+    
   });
 });
