@@ -267,7 +267,7 @@ $(document).ready(function(){
         vacationRequest.getDateRange();
         let pastOverlapVacations = showPriorVacations(vacationRequest, currentNurse);
         if (pastOverlapVacations.length > 0){
-          $("#priorVacationMessage").append(`<p>Similar vacation dates in last two years: </p>`);
+          $("#priorVacationMessage").text(`Similar vacation dates in last two years:`);
           for (let i=0; i< pastOverlapVacations.length; i++){
             $("#priorVacationMessage").append(`<p>${pastOverlapVacations[i].toDateString()}</p>`);
           }
