@@ -108,7 +108,7 @@ export class Unit{
     }); 
   }
 
-  compareWithOtherVacationRequests(sortedStaff){
+  compareVacationRequests(sortedStaff){
     let overlapVacationRequests = [];
     let staffIndex = 0;
   
