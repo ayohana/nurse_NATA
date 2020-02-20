@@ -6,9 +6,9 @@
 
 ## Description
 
-**This application was made to ease the work of a nurse scheduler. The nurse scheduler can input the nurse' vacation requests stating the vacation start date, vacation end date, number of days requested off & additional commnets as required.
-This application also allows nurse scheduler to add work requests made by nurses nad display it for references.
-It sorts the vacation requests by name or by job start date.
+**This application was made to ease the work of a nurse scheduler. The nurse scheduler can input the nurse's requests which consists of  vacation start date, vacation end date, number of days requested off & additional comments as required. <br>
+This application also allows nurse scheduler to add work requests made by nurses nad display it for references and update the due dates for form submmision.<br>
+It sorts the vacation requests by name or by job start date.<br>
 Priority is given to nurses in the following order:**
 
 * FTE level (full-time, part-time, and per diem)
@@ -28,6 +28,7 @@ Note: This application does **not** make decisions on which nurse gets the dates
 * Open the command line and navigate into the repository.
   * Use the command `npm install` to install all necessary plugins.
   * Use the command `npm run start` to start the web application.
+* Start submitting requests.                                                                                        
 
 ### Requirements to Run
 * _Web Browser_
@@ -38,7 +39,7 @@ Note: This application does **not** make decisions on which nurse gets the dates
 ## Other Technologies Used
 
 * _HTML_
-* _CSS_
+* _CSS_                                                                    
 * _Javascript_
 * _JQuery 3.4.1_
 * _Bootstrap 4.4.1_
@@ -69,7 +70,7 @@ Note: This application does **not** make decisions on which nurse gets the dates
 |Sort the list by last name| Jennifer Davis <br> Lisa Lee <br> Laura Adams| Laura Adams <br> Jennifer Davis <br> Lisa Lee
 |Priotrize nurses by FTE level|Susan Thomas 0.6 <br> Laura Adams per diem <br> Nancy Wright 0.9|Laura Adams <br> Susan Thomas <br> Nancy Wright
 |Priotrize nurses by hours worked|Jennifer Davis: 1743 hrs <br> Barbaar Jones: 7439 hrs <br> Maria Miller: 8482 hrs| Maria Miller <br> Barbara Jones <br> Jennifer Davis
-|The application will give priority list for overlapping vacaton requests dates| Elizabeth Brown = 2/4-2/6 priority = 3 <br> Jennifer Davis = 2/5-2/7 priority =2 <br> Maria Miller = 2/6-2/8 priority = 1|Maria Miller <br> Jennifer Davis <br> Elizabeth Brown
+|The application will give priority list for overlapping vacaton requests dates| Elizabeth Brown = 2/4-2/6 'priority = 3' <br> Jennifer Davis = 2/5-2/7 'priority =2' <br> Maria Miller = 2/6-2/8 'priority = 1'|Maria Miller <br> Jennifer Davis <br> Elizabeth Brown
 
 ## Screenshots
 
@@ -96,8 +97,6 @@ If there are any question or concerns please contact us at our emails:
 * [Tiffany Siu](mailto:tsiu88@gmail.com)
 * [Neha Doodi](mailto:nehadoodipoonia@gmail.com)
 * [Andriy Veremyeyev](mailto:belyybrat@gmail.com)
-
-Thank you.
 
 ### License
 
