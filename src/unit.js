@@ -10,9 +10,9 @@ export class Unit{
     this.sortedRegisteredNurses = [];
     this.sortedNursingAssistants = [];
     this.requestDueDate;
-    this.holidays2020;
-    this.holidays2019;
-    this.holidays2018;
+    this.holidays2020 = [new Date("2020/07/04"), new Date("2020/09/07")];
+    this.holidays2019 = [new Date("2019/07/04"), new Date("2019/09/02")];
+    this.holidays2018 = [new Date("2018/07/04"), new Date("2018/09/03")];
   }
 
   addNurse(nurse){
@@ -107,4 +107,33 @@ export class Unit{
       return 0;
     }); 
   }
+
+  compareWithOtherVacationRequests(sortedStaff){
+    let overlapVacationRequests = [];
+    let staffIndex = 0;
+  
+    for (let j=0; j < sortedStaff.length; j++){
+      if (staffIndex >= sortedStaff.length - 1) {
+        staffIndex = 0;
+      } else {
+        staffIndex += 1;
+      }
+
+      for (let i=0; i < sortedStaff[j].vacationRequests.length; i++) {
+        let rangeWithTime = [];
+        sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
+
+        for (let k=0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
+
+          if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
+            overlapVacationRequests.push(sortedStaff[j].firstName + " and " + sortedStaff[staffIndex].firstName + " have overlapping request days: " + sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k]);
+          } 
+
+        }
+      }
+    }
+    return overlapVacationRequests;
+  }
+
+
 }

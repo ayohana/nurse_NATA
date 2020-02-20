@@ -40,7 +40,6 @@ export class VacationRequest {
     for (var range = [], i = start; i <= end; i.setDate(i.getDate()+1)) {
       range.push(new Date(i));
     }
-    console.log(range);
     this.vacationReqDateRange = range;
   }
 

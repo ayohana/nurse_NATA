@@ -127,7 +127,7 @@ $(document).ready(function(){
   let nurseG = new Nurse("G", "Gegege", new Date("2013/06/09"), 1356, [1/3], "CN", 0.6);
   let nurseH = new Nurse("H", "Hihi", new Date("2011/08/15"), 2356, [1/2], "CN", 0.9);
   let nurseI = new Nurse("I", "Eye", new Date("2003/02/14"), 5413, [], "CN", 0.3);
-
+ 
   let nurseJ = new Nurse("J", "Bird", new Date("2007/04/17"), 7439, [1/3], "RN", 0.6);
   let nurseK = new Nurse("K", "Okokok", new Date("2002/08/08"), 4523, [1/2], "RN", 0.9);
   let nurseL = new Nurse("L", "El", new Date("1998/07/11"), 1743, [], "RN", 0.3);
@@ -164,24 +164,28 @@ $(document).ready(function(){
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
   nurseA.pastSchedule2019.savePastSchedule([new Date("2019/06/01"), new Date("2019/06/02"), new Date("2019/06/04")]);
-  nurseB.pastSchedule2019.savePastSchedule([]);
+  nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/4"), new Date("2019/7/21"), new Date("2019/07/22"), new Date("2019/07/23"), new Date("2019/07/24")]);
   nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
   nurseA.pastSchedule2019.savePriorVacationDates([]);
-  nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/02"), new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05"), new Date("2019/06/06")]);
+  nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03")]);
   nurseC.pastSchedule2019.savePriorVacationDates([]);
-  
-  nurseA.addVacationRequestTest("A", "Last", new Date("2020/01/17"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1"); // Request Date: 1/17/20
-  nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/06/02"), new Date("2020/06/10"), 3, 100, "test1");
+
+  nurseA.addVacationRequestTest("A", "Last", new Date("2020/01/17"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
+  nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/06/30"), new Date("2020/07/02"), 3, 100, "test1");
+  nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/07/04"), new Date("2020/07/06"), 3, 100, "test1");
   nurseC.addVacationRequestTest("C", "Name", new Date("2020/01/20"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
 
-  // nurseB.vacationRequests[0].getDateRange();
-
-  nurseB.compareWithPriorVacations(nurseB.pastSchedule2019.priorVacationDates);
-
-  console.log(unit);
-  console.log(nurseA);
-  console.log(nurseB);
-  console.log(nurseC);
+  nurseG.addVacationRequestTest("G", "Gegege", new Date("2020/01/17"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
+  nurseH.addVacationRequestTest("H", "Hihi", new Date("2020/01/15"), new Date("2020/06/30"), new Date("2020/07/05"), 3, 100, "test1");
+  nurseI.addVacationRequestTest("I", "Eye", new Date("2020/01/15"), new Date("2020/07/01"), new Date("2020/07/06"), 3, 100, "test1");
+ 
+  nurseB.analyzeVacationRequest(unit.holidays2020);
+  nurseG.vacationRequests[0].getDateRange();
+  nurseH.vacationRequests[0].getDateRange();
+  nurseI.vacationRequests[0].getDateRange();
+  console.log(unit.sortedChargeNurses);
+  console.log(unit.compareWithOtherVacationRequests(unit.sortedChargeNurses));
+ 
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();
