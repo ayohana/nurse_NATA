@@ -110,11 +110,29 @@ function showPriorVacations(nurse) {
   }
 }
 
-// function showPastHolidaysWorked(nurse) {
-//   let workedPastHolidays;
-  
-//   workedPastHolidays = nurse.vacationRequests[i].vacationReqDateRange
-// }
+function showPastHolidaysWorked(nurse, unit) {
+  let workedPastHolidays;
+  for (let m = 0; m < nurse.vacationRequests.length; m++) {
+    for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
+      workedPastHolidays = nurse.compareWithPastHolidaysWorked(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2019.daysWorked, unit.holidays2019);
+      if (workedPastHolidays.length === 0) {
+        console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2019.`)
+      } else {
+        console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2019: ${workedPastHolidays}. They may have their vacation request approved this year.`)
+      }
+    }
+  }
+  for (let m = 0; m < nurse.vacationRequests.length; m++) {
+    for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
+      workedPastHolidays = nurse.compareWithPastHolidaysWorked(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2018.daysWorked, unit.holidays2018);
+      if (workedPastHolidays.length === 0) {
+        console.log(`${nurse.firstName} ${nurse.lastName} did not work any holidays in 2018.`)
+      } else {
+        console.log(`${nurse.firstName} ${nurse.lastName} worked on these holidays in 2018: ${workedPastHolidays}.`)
+      }
+    }
+  }
+}
 
 $(document).ready(function(){
   let unit = new Unit();
@@ -183,15 +201,15 @@ $(document).ready(function(){
   addToPriorityOutput(unit.sortedRegisteredNurses, "RNpriority");
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
-  nurseA.pastSchedule2019.savePastSchedule([new Date("2019/06/01"), new Date("2019/06/02"), new Date("2019/06/04")]);
+  nurseA.pastSchedule2019.savePastSchedule([new Date("2019/06/01"), new Date("2019/06/02"), new Date("2019/06/04"), new Date("2019/07/03"), new Date("2019/07/04"), new Date("2019/07/05")]);
   nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/4"), new Date("2019/7/21"), new Date("2019/07/22"), new Date("2019/07/23"), new Date("2019/07/24")]);
   nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
   nurseA.pastSchedule2019.savePriorVacationDates([]);
-  nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03")]);
+  nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03"), new Date("2019/07/04")]);
   nurseB.pastSchedule2018.savePriorVacationDates([new Date("2018/06/29"), new Date("2018/06/30"), new Date("2018/07/01"), new Date("2018/07/02"), new Date("2018/07/03")]);
   nurseC.pastSchedule2019.savePriorVacationDates([]);
 
-  nurseA.addVacationRequestTest("A", "Last", new Date("2020/01/17"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
+  nurseA.addVacationRequestTest("A", "Last", new Date("2020/01/17"), new Date("2020/07/03"), new Date("2020/07/06"), 3, 100, "test1");
   nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/06/30"), new Date("2020/07/02"), 3, 100, "test1");
   nurseB.addVacationRequestTest("B", "Class", new Date("2020/01/15"), new Date("2020/07/04"), new Date("2020/07/06"), 3, 100, "test1");
   nurseC.addVacationRequestTest("C", "Name", new Date("2020/01/20"), new Date("2020/05/01"), new Date("2020/05/15"), 3, 100, "test1");
@@ -205,7 +223,9 @@ $(document).ready(function(){
   // console.log(unit.compareVacationRequests(unit.sortedChargeNurses));
   // console.log(unit);
   // console.log(nurseB.checkVacationRequest());
-  showPriorVacations(nurseB);
+  showPriorVacations(nurseA);
+  showPastHolidaysWorked(nurseA, unit);
+  // console.log(unit);
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();
