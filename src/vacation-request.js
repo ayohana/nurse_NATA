@@ -16,6 +16,7 @@ export class VacationRequest {
     this.approvedWorkReturnDate;
   }
 
+  // Check if nurse has vacation hours available and return boolean
   checkVacationHoursAvailable() {
     let hoursRequestedOff = parseFloat(this.workDaysRequestedOff * 12);
     if (this.vacationHoursAvailable >= hoursRequestedOff) {
@@ -25,6 +26,7 @@ export class VacationRequest {
     }
   }
 
+  // Check if vacation request is submitted before due date
   checkVacationRequest(requestDueDate){
     if (this.submissionDate > requestDueDate) {
       return false;
@@ -33,6 +35,7 @@ export class VacationRequest {
     }
   }
 
+  // For a start and end date, make an array of Date objects of all days in range and set range for this vacation request
   getDateRange() {
     let start = new Date(this.vacationStartDate);
     let end = new Date(this.workReturnDate);

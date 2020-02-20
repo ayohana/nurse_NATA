@@ -15,6 +15,7 @@ export class Unit{
     this.holidays2018 = [new Date("2018/07/04"), new Date("2018/09/03")];
   }
 
+  // Add nurse object into array of all nurses and correct array for type of nurse
   addNurse(nurse){
     this.nurses.push(nurse);
     this.sortByLastName(this.nurses);
@@ -27,6 +28,7 @@ export class Unit{
     }
   }
 
+  // Search nurse array by name and return if found
   searchNurse(firstName, lastName){
     for(let i=0; i< this.nurses.length; i++){
       if (lastName.toLowerCase() === this.nurses[i].lastName){
@@ -39,6 +41,7 @@ export class Unit{
     alert("No nurse found by this name");
   }
 
+  // Sort array of nurses first by FTE, then sort by hours or hire date within their FTE group and return merged array with the groups intact
   sortByFTE(array){
     let fullTime = [];
     let partTime = [];
@@ -77,6 +80,7 @@ export class Unit{
 
   }
 
+  // Merge FTE group arrays in correct order and return merged array
   mergedArrays(fullTime, partTime, perDiem){
     let mergedArray = perDiem.concat(partTime);
     mergedArray = mergedArray.concat(fullTime);
@@ -86,14 +90,17 @@ export class Unit{
     return mergedArray;
   }
 
+  // Sort by hours worked, use for Nursing assistants
   sortByHours(roleArray){
     roleArray.sort((a,b) => parseFloat(b.hoursWorked) - parseFloat(a.hoursWorked));
   }
 
+  // Sort by hire date, use for Charge nurses and Registered nurses
   sortByHireDate(roleArray){
     roleArray.sort((a,b) => a.hireDate - b.hireDate);
   }
 
+  // Take nurse array and add all work requests into an array with the name, then sort by work request date and return sorted array
   sortWorkByDate(nurseArray){
     let workArray = [];
     for (let i=0; i< nurseArray.length; i++){
@@ -108,6 +115,7 @@ export class Unit{
     return workArray;
   }
 
+  // Take nurse array and add all vacation requests into an array with the name and vacation request object, then sort by start date and return sorted array
   sortVacationsByStartDate(nurseArray){
     let vacationArray = [];
     for (let i=0; i< nurseArray.length; i++){
@@ -123,6 +131,7 @@ export class Unit{
     
   }
 
+  // Take nurse array and sort by last name
   sortByLastName(nurseArray){
     nurseArray.sort(function(a,b){
       let c = a.lastName.toLowerCase();
@@ -137,6 +146,7 @@ export class Unit{
     }); 
   }
 
+  // Compares between nurses for overlapping dates within the type of nurse
   compareVacationRequests(sortedStaff){
     let overlapVacationRequests = [];
     let staffIndex = 0;
