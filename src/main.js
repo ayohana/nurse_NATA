@@ -91,29 +91,22 @@ function addWorkRequestOutput(nurseArray){
   }
 }
 
-// Check if Nurse had prior vacation dates that are the same for last 2 years
-function showPriorVacations(nurse) {
-  let workedPastVacDates;
-  for (let m = 0; m < nurse.vacationRequests.length; m++) {
+// Check if current request had prior vacation dates that are the same for last 2 years and returns an array
+function showPriorVacations(request, nurse) {
+  let workedPastVacDates = [];
+  let workedPast1VacDates = [];
+  if(nurse.pastSchedule2019){
     for (let i = 0; i < nurse.pastSchedule2019.priorVacationDates.length; i++) {
-      workedPastVacDates = nurse.compareWithPriorVacations(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2019.priorVacationDates[i]);
-      if (workedPastVacDates.length === 0) {
-        console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2019 compared to the dates requested this year.`);
-      } else {
-        console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2019 compared to this year: ${workedPastVacDates}`);
-      }
+      workedPastVacDates = nurse.compareWithPriorVacations(request.vacationReqDateRange, nurse.pastSchedule2019.priorVacationDates[i]);
     }
   }
-  for (let m = 0; m < nurse.vacationRequests.length; m++) {
+  if(nurse.pastSchedule2018) {
     for (let i = 0; i < nurse.pastSchedule2018.priorVacationDates.length; i++) {
-      workedPastVacDates = nurse.compareWithPriorVacations(nurse.vacationRequests[m].vacationReqDateRange, nurse.pastSchedule2018.priorVacationDates[i]);
-      if (workedPastVacDates.length === 0) {
-        console.log(`${nurse.firstName} ${nurse.lastName} do not have the same vacation dates in 2018 compared to the dates requested this year.`);
-      } else {
-        console.log(`${nurse.firstName} ${nurse.lastName} had similar vacation dates in 2018 compared to this year: ${workedPastVacDates}`);
-      }
+      workedPast1VacDates = nurse.compareWithPriorVacations(request.vacationReqDateRange, nurse.pastSchedule2018.priorVacationDates[i]);
     }
+    workedPastVacDates = workedPastVacDates.concat(workedPast1VacDates);
   }
+  return workedPastVacDates;
 }
 
 // Check if Nurse worked on the holidays in the past 2 years
@@ -224,7 +217,15 @@ $(document).ready(function(){
   addToPriorityOutput(unit.sortedRegisteredNurses, "RNpriority");
   addToPriorityOutput(unit.sortedNursingAssistants, "NACpriority");
 
-  showPriorVacations(nurseA);
+  nurseA.pastSchedule2019.savePastSchedule([new Date("2019/06/01"), new Date("2019/06/02"), new Date("2019/06/04")]);
+  nurseB.pastSchedule2019.savePastSchedule([new Date("2019/07/4"), new Date("2019/7/21"), new Date("2019/07/22"), new Date("2019/07/23"), new Date("2019/07/24")]);
+  nurseC.pastSchedule2019.savePastSchedule([new Date("2019/06/03"), new Date("2019/06/04"), new Date("2019/06/05")]);
+  nurseA.pastSchedule2019.savePriorVacationDates([new Date("2019/03/05"), new Date("2019/03/06"), new Date("2019/03/07")]);
+  nurseB.pastSchedule2019.savePriorVacationDates([new Date("2019/06/29"), new Date("2019/06/30"), new Date("2019/07/01"), new Date("2019/07/02"), new Date("2019/07/03")]);
+  nurseC.pastSchedule2019.savePriorVacationDates([]);
+  nurseA.pastSchedule2018.savePriorVacationDates([new Date("2018/03/10"), new Date("2018/03/11"), new Date("2018/03/12")]);
+
+  //showPriorVacations(nurseA);
   showPastHolidaysWorked(nurseA, unit);
   showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
   showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
@@ -258,15 +259,27 @@ $(document).ready(function(){
     if (vacationRequest.checkVacationSubmissionDate(unit.requestDueDate)){
 
       if(vacationRequest.adequateVacationHours === true){
-        if (currentNurse.vacationRequests.some(request => request.vacationStartDate.getTime() === vacationRequest.vacationStartDate.getTime()) && currentNurse.vacationRequests.some(request => request.workReturnDate.getTime() === vacationRequest.workReturnDate.getTime())){
-          $("#vacationMessage").text("Vacation request already exists!");
+        $("#priorVacationMessage").text("");
+        vacationRequest.getDateRange();
+        let pastOverlapVacations = showPriorVacations(vacationRequest, currentNurse);
+        if (pastOverlapVacations.length > 0){
+          $("#priorVacationMessage").append(`<p>Similar vacation dates in last two years: </p>`);
+          for (let i=0; i< pastOverlapVacations.length; i++){
+            $("#priorVacationMessage").append(`<p>${pastOverlapVacations[i].toDateString()}</p>`)
+          }
         } else {
-          currentNurse.addVacationRequest(vacationRequest);
-          $("#vacationOutput").empty();
-          $("#allVacationOutput").show();
-          $("#outputVacationMessage").hide();
-          addVacationRequestOutput(unit.nurses);
-          $("#vacationMessage").text("Vacation request succesfully submitted!");
+          $("#priorVacationMessage").text(`No similar vacation dates found in the last two years.`);
+
+          if (currentNurse.vacationRequests.some(request => request.vacationStartDate.getTime() === vacationRequest.vacationStartDate.getTime()) && currentNurse.vacationRequests.some(request => request.workReturnDate.getTime() === vacationRequest.workReturnDate.getTime())){
+            $("#vacationMessage").text("Vacation request already exists!");
+          } else {
+            currentNurse.addVacationRequest(vacationRequest);
+            $("#vacationOutput").empty();
+            $("#allVacationOutput").show();
+            $("#outputVacationMessage").hide();
+            addVacationRequestOutput(unit.nurses);
+            $("#vacationMessage").text("Vacation request succesfully submitted!");
+          }
         }
 
       } else {
