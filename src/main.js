@@ -169,13 +169,11 @@ $(document).ready(function(){
   nurseH.addVacationRequestTest("H", "Hihi", new Date("2020/01/15"), new Date("2020/06/30"), new Date("2020/07/05"), 3, 100, "test1");
   nurseI.addVacationRequestTest("I", "Eye", new Date("2020/01/15"), new Date("2020/07/01"), new Date("2020/07/06"), 3, 100, "test1");
  
-  nurseB.analyzeVacationRequest(unit.holidays2020);
-  nurseG.vacationRequests[0].getDateRange();
-  nurseH.vacationRequests[0].getDateRange();
-  nurseI.vacationRequests[0].getDateRange();
-  console.log(unit.sortedChargeNurses);
-  console.log(unit.compareWithOtherVacationRequests(unit.sortedChargeNurses));
- 
+  // nurseB.analyzeVacationRequest(unit.holidays2020);
+  // console.log(unit.sortedChargeNurses);
+  // console.log(unit.compareVacationRequests(unit.sortedChargeNurses));
+  // console.log(unit);
+  console.log(nurseB.checkVacationRequest());
 
   $("#dueDateButton").click(function(event){
     event.preventDefault();

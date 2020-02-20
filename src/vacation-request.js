@@ -33,10 +33,9 @@ export class VacationRequest {
     }
   }
 
-  getDateRange() {  // Where and when to call this method?
-    let start = this.vacationStartDate;
-    let end = this.workReturnDate;
-
+  getDateRange() {
+    let start = new Date(this.vacationStartDate);
+    let end = new Date(this.workReturnDate);
     for (var range = [], i = start; i <= end; i.setDate(i.getDate()+1)) {
       range.push(new Date(i));
     }
