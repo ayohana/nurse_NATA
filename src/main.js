@@ -144,6 +144,7 @@ function showStaffOverlapVacReqs(unit, sortedStaff){
   // } else {
   //   console.log(`These ${sortedStaff[0].role}'s have overlapping vacation requests: ${Object.keys(overlapVacReqs)} on these dates: ${Object.values(overlapVacReqs)}`);
   // }
+  
 }
 
 // User Interface LOGIC ----------------------------------------------------
@@ -154,7 +155,7 @@ $(document).ready(function(){
   $("#allWorkOutput").hide();
   $("#outputWorkMessage").show();
   $("#conflictingOutput").hide();
-  $("#conflictingRequests").hide();
+  //$("#conflictingRequests").hide();
 
   // When enter input in vacation start date field, check if end date is before start date and clear input if start date invalid
   document.getElementById("vacationStartDate").addEventListener("input", function(){
@@ -371,11 +372,13 @@ $(document).ready(function(){
     $("#conflictingRN").text("");
     $("#conflictingNAC").text("");
     let CNOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
+    console.log(CNOverlapObj);
     let RNOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
     let NACOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
     if ($.isEmptyObject(CNOverlapObj)) {
       $("#conflictingCN").text("No overlapping vacation requests for CNs.");
     } else{
+      console.log("inside CN writing", CNOverlapObj);
       for (let i=0; i< CNOverlapObj.length; i++){
         $("#conflictingCN").append(`<li>${Object.keys(CNOverlapObj)[i]} overlap on dates ${Object.values(CNOverlapObj)[i]}</li>`);
       }

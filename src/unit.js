@@ -146,10 +146,10 @@ export class Unit{
   compareVacationRequests(sortedStaff){
     let overlapVacationRequests = {};
     let staffNames;
-    // May not need this increased index.  Do more tests
-    let staffIndex = -1;
+    // May not need this increased index.  Do more tests sortedStaff.length - 2 works for 3 ppl conflicts??
+    let staffIndex = 0;
     for (let j = 0; j < sortedStaff.length; j++){
-      if (staffIndex >= sortedStaff.length - 1) {
+      if (staffIndex > sortedStaff.length - 2) {
         staffIndex = 0;
       } else {
         staffIndex += 1;
@@ -158,14 +158,18 @@ export class Unit{
         if (sortedStaff[j].vacationRequests.length != 0) {
           let rangeWithTime = [];
           sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
-          // console.log(sortedStaff[staffIndex].vacationRequests[i]);
-          // console.log(staffIndex);
-          for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
-            if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
-              staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
-              overlapVacationRequests[staffNames] += `${sortedStaff[j].vacationRequests[i].vacationReqDateRange[k]} `;
-            } 
+          if (Array.isArray(sortedStaff[staffIndex].vacationRequests) || sortedStaff[staffIndex].vacationRequests.length != 0){
+            for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
+              if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
+                staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
+                if (overlapVacationRequests[staffNames] == undefined){
+                  overlapVacationRequests[staffNames] = "";
+                }
+                overlapVacationRequests[staffNames] += `${sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k]} `;
+              } 
+            }
           }
+          
         }
       }
     }
