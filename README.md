@@ -76,7 +76,7 @@ Note: This application does **not** make decisions on which nurse gets the dates
 
 _Here is a snippet of what the input looks like:_
 
-![image of info to be entered](src/img/img1.png)
+![image of info to be entered](src/img/snippet1.png)
 
 _Here are some snippets of what the output looks like:_
 
