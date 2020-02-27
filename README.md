@@ -52,6 +52,7 @@ Note: This application does **not** make decisions on which nurse gets the dates
 * It allows the scheduler to sort the requests by name or by date. 
 * It does not accept enteries if the form is submiited past due date.
 * If vacation start date is after the work return date, it does not takes the entry.
+* Pairs of nurses with overlapping vacation requests are listed with overlapping days and the nurse with higher priority is listed first.
 
 
 ## User Stories
