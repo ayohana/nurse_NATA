@@ -146,8 +146,8 @@ export class Unit{
     let overlapVacationRequests = {};
     let staffNames;
     let staffIndex = 0;
-    for (let j = 0; j < sortedStaff.length; j++){
-      if (staffIndex > sortedStaff.length - 2) {
+    for (let j = 0; j < sortedStaff.length-1; j++){
+      if (staffIndex >= sortedStaff.length - 1) {
         staffIndex = 0;
       } else {
         staffIndex += 1;
@@ -156,17 +156,22 @@ export class Unit{
         if (sortedStaff[j].vacationRequests.length != 0) {
           let rangeWithTime = [];
           sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
-          if (Array.isArray(sortedStaff[staffIndex].vacationRequests) && sortedStaff[staffIndex].vacationRequests.length != 0){
-            for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
-              if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
-                staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
-                if (overlapVacationRequests[staffNames] == undefined){
-                  overlapVacationRequests[staffNames] = "";
-                }
-                overlapVacationRequests[staffNames] += `${sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].toDateString()} `;
-              } 
+
+          for(let l=staffIndex; l<sortedStaff.length; l++){
+            if (Array.isArray(sortedStaff[l].vacationRequests) && sortedStaff[l].vacationRequests.length != 0 && l != j){
+
+              for (let k = 0; k < sortedStaff[l].vacationRequests[i].vacationReqDateRange.length; k++){
+                if (rangeWithTime.includes(sortedStaff[l].vacationRequests[i].vacationReqDateRange[k].getTime())){
+                  staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[l].firstName} ${sortedStaff[l].lastName}`;
+                  if (overlapVacationRequests[staffNames] == undefined){
+                    overlapVacationRequests[staffNames] = "";
+                  }
+                  overlapVacationRequests[staffNames] += `${sortedStaff[l].vacationRequests[i].vacationReqDateRange[k].toDateString()} `;
+                } 
+              }
             }
           }
+          
           
         }
       }
