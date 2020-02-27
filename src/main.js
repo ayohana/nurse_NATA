@@ -358,7 +358,7 @@ $(document).ready(function(){
     addWorkRequestOutput(sorted);
   });
 
-  // NOT FINISHED
+  // When click refresh overlapping requests, show all vacation requests that overlap between nurses that have the same role
   $("#showConflicts").click(function(event){
     event.preventDefault();
     $("#conflictingOutput").show();

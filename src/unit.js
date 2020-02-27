@@ -158,7 +158,6 @@ export class Unit{
           sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
           if (Array.isArray(sortedStaff[staffIndex].vacationRequests) && sortedStaff[staffIndex].vacationRequests.length != 0){
             for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
-              console.log(sortedStaff[staffIndex].vacationRequests);
               if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
                 staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
                 if (overlapVacationRequests[staffNames] == undefined){
