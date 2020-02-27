@@ -141,12 +141,10 @@ export class Unit{
     }); 
   }
 
-  // NOT FINISHED
   // Compares between nurses for overlapping dates within the type of nurse and returns an object with both nurses names as a key and the dates that overlap as a value
   compareVacationRequests(sortedStaff){
     let overlapVacationRequests = {};
     let staffNames;
-    // May not need this increased index.  Do more tests sortedStaff.length - 2 works for 3 ppl conflicts??
     let staffIndex = 0;
     for (let j = 0; j < sortedStaff.length; j++){
       if (staffIndex > sortedStaff.length - 2) {
@@ -158,14 +156,15 @@ export class Unit{
         if (sortedStaff[j].vacationRequests.length != 0) {
           let rangeWithTime = [];
           sortedStaff[j].vacationRequests[i].vacationReqDateRange.forEach(element => rangeWithTime.push(element.getTime()));
-          if (Array.isArray(sortedStaff[staffIndex].vacationRequests) || sortedStaff[staffIndex].vacationRequests.length != 0){
+          if (Array.isArray(sortedStaff[staffIndex].vacationRequests) && sortedStaff[staffIndex].vacationRequests.length != 0){
             for (let k = 0; k < sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange.length; k++){
+              console.log(sortedStaff[staffIndex].vacationRequests);
               if (rangeWithTime.includes(sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].getTime())){
                 staffNames = `${sortedStaff[j].firstName} ${sortedStaff[j].lastName} and ${sortedStaff[staffIndex].firstName} ${sortedStaff[staffIndex].lastName}`;
                 if (overlapVacationRequests[staffNames] == undefined){
                   overlapVacationRequests[staffNames] = "";
                 }
-                overlapVacationRequests[staffNames] += `${sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k]} `;
+                overlapVacationRequests[staffNames] += `${sortedStaff[staffIndex].vacationRequests[i].vacationReqDateRange[k].toDateString()} `;
               } 
             }
           }

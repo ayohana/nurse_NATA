@@ -135,16 +135,10 @@ function showPastHolidaysWorked(nurse, unit) {
   }
 }
 
-// NOT FINISHED
-// Show message for if there are overlapping vacation request dates within group of a nurse type
+
+// Get overlapping vacations and names if there are overlapping vacation request dates within group of a nurse type
 function showStaffOverlapVacReqs(unit, sortedStaff){
   return unit.compareVacationRequests(sortedStaff);
-  // if ($.isEmptyObject(overlapVacReqs)) {
-  //   console.log(`${sortedStaff[0].role}s in this Unit do not have any overlapping vacation requests.`);
-  // } else {
-  //   console.log(`These ${sortedStaff[0].role}'s have overlapping vacation requests: ${Object.keys(overlapVacReqs)} on these dates: ${Object.values(overlapVacReqs)}`);
-  // }
-  
 }
 
 // User Interface LOGIC ----------------------------------------------------
@@ -372,33 +366,24 @@ $(document).ready(function(){
     $("#conflictingRN").text("");
     $("#conflictingNAC").text("");
     let CNOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedChargeNurses);
-    console.log(CNOverlapObj);
     let RNOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedRegisteredNurses);
     let NACOverlapObj = showStaffOverlapVacReqs(unit, unit.sortedNursingAssistants);
     if ($.isEmptyObject(CNOverlapObj)) {
       $("#conflictingCN").text("No overlapping vacation requests for CNs.");
     } else{
-      console.log("inside CN writing", CNOverlapObj);
-      for (let i=0; i< CNOverlapObj.length; i++){
-        $("#conflictingCN").append(`<li>${Object.keys(CNOverlapObj)[i]} overlap on dates ${Object.values(CNOverlapObj)[i]}</li>`);
-      }
+      Object.entries(CNOverlapObj).forEach(([key, value]) => $("#conflictingCN").append(`<li>${key} overlap on dates ${value}</li>`));
     }
 
     if($.isEmptyObject(RNOverlapObj)){
       $("#conflictingRN").text("No overlapping vacation requests for RNs.");
     } else {
-      for (let i=0; i< RNOverlapObj.length; i++){
-        $("#conflictingRN").append(`<li>${Object.keys(RNOverlapObj)[i]} overlap on dates ${Object.values(RNOverlapObj)[i]}</li>`);
-      }
+      Object.entries(RNOverlapObj).forEach(([key, value]) => $("#conflictingRN").append(`<li>${key} overlap on dates ${value}</li>`));
     }
 
     if($.isEmptyObject(NACOverlapObj)){
       $("#conflictingNAC").text("No overlapping vacation requests for NACs.");
     } else{
-      for (let i=0; i< NACOverlapObj.length; i++){
-        $("#conflictingNAC").append(`<li>${Object.keys(NACOverlapObj)[i]} overlap on dates ${Object.values(NACOverlapObj)[i]}</li>`);
-      }
+      Object.entries(NACOverlapObj).forEach(([key, value]) => $("#conflictingNAC").append(`<li>${key} overlap on dates ${value}</li>`));
     }
-    
   });
 });
